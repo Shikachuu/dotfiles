@@ -1,0 +1,16 @@
+[credential "https://github.com"]
+    helper = 
+    helper = !~/.arkade/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+    helper = 
+    helper = !~/.arkade/bin/gh auth git-credential
+[user]
+    name = Czékus Máté
+    email = mate@picloud.hu
+[includeIf "gitdir:~/Documents/work/"]
+    path = .gitconfig-work
+[core]
+	autocrlf = input
+	excludesfile = /home/shika/.config/git/.gitignore
+[push]
+	autoSetupRemote = true

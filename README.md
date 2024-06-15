@@ -14,7 +14,7 @@ To install some or all of my dotfiles, clone this repository and use GNU Stow to
 ```bash
 gh repo clone Shikachuu/dotfiles
 cd dotfiles
-stow <package>
+stow -v -R -t $HOME <package>
 ```
 
 ## Packages

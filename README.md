@@ -13,6 +13,7 @@ To install some or all of my dotfiles, clone this repository and use GNU Stow to
 
 ```bash
 gh repo clone Shikachuu/dotfiles
+git submodule update --init --recursive
 cd dotfiles
 stow -v -R -t $HOME <package>
 ```
@@ -22,9 +23,7 @@ stow -v -R -t $HOME <package>
 - `bash`
 - `git`
 - `nvim`
-- `starship`
 - `kitty`
-- `zoxide`
 - `linux` (for Linux specific configurations)
 - `macos` (for macOS specific configurations)
 

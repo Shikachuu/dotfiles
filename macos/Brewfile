@@ -1,0 +1,20 @@
+brew "docker"
+brew "docker-compose"
+brew "bash"
+brew "fzf"
+brew "go"
+brew "lima"
+brew "htop"
+brew "node"
+brew "neovim"
+brew "zoxide"
+brew "stow"
+brew "lazygit"
+brew "mas"
+
+cask "kitty"
+cask "rectangle"
+
+mas "Bitwarden", id: 1352778147
+mas "AdGuard for Safari", id: 1440147259
+mas "Slack", id: 803453959

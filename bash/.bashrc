@@ -7,7 +7,7 @@ HISTFILESIZE=2000
 PATH="$HOME/.arkade/bin/:/usr/bin:$PATH"
 
 # Default override
-alias ls='ls -hN --color=auto --group-directories-first'
+alias ls='ls -h --color=auto'
 alias cp="cp -iv"
 alias mv="mv -iv"
 alias rm="rm -vI"

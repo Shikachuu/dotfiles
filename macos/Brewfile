@@ -19,7 +19,9 @@ brew "starship"
 brew "stow"
 brew "zoxide"
 brew "jesseduffield/lazygit/lazygit"
+brew "jq"
 
+cask "hma-vpn"
 cask "kitty"
 cask "rectangle"
 

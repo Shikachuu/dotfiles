@@ -10,7 +10,22 @@
 [includeIf "gitdir:~/Documents/work/"]
     path = .gitconfig-work
 [core]
-	autocrlf = input
-	excludesfile = /home/shika/.config/git/.gitignore
+    autocrlf = input
+    excludesfile = /home/shika/.config/git/.gitignore
 [push]
-	autoSetupRemote = true
+    autoSetupRemote = true
+[init]
+    defaultBranch = main
+[pull]
+    rebase = true
+[alias]
+    l = log --decorate --date=relative
+    s = status -s
+    m = merge
+    c = commit
+    co = checkout
+    aa = add --all
+    ca = commit --amend
+    call = !git aa && git c -s -m
+    dropl = reset --hard HEAD~1
+    ignore = update-index --assume-unchanged

@@ -23,6 +23,7 @@ alias cd..='cd ..'
 # Extend default features
 alias ll='ls -alF'
 alias la='ls -A'
+alias g='git'
 alias incognito='HISTFILE="" exec bash'
 alias myip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias mylocalip="ip -j -4 address | jq '.[].addr_info[0] | \"\(.label): \(.local)\"' | sed 's/\"//g' | grep -v 'lo:.*'"
@@ -39,15 +40,9 @@ if [[ $TERM == "xterm-kitty" ]]; then
 fi
 
 # Git commands
-alias glog='git log --decorate --date=relative'
 alias gtoday='git log --since=midnight --branches --no-merges --pretty=format:"%t%C(green)%d %C(magenta)%an %C(default)%cr: %C(bold)%s"'
-alias gco='git checkout'
-alias gdropl='git reset --hard HEAD~1'
-alias gignore='git update-index --assume-unchanged'
-alias gcall='git add -A && git commit -s -m $@'
 alias gbcleanmr="git branch --merged origin/master | xargs git branch -d"
 alias gbcleanmn="git branch --merged origin/main | xargs git branch -d"
-alias gpull='git pull --rebase'
 
 # Container commands
 alias pm='podman'

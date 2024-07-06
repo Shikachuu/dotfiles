@@ -1,0 +1,25 @@
+{
+    "name": "snippets",
+    "contributes": {
+        "snippets": [
+            {
+                "language": [
+                    "all"
+                ],
+                "path": "./all.json"
+            },
+            {
+                "language": [
+                    "go"
+                ],
+                "path": "./go.json"
+            },
+            {
+                "language": [
+                    "proto"
+                ],
+                "path": "./proto.json"
+            }
+        ]
+    }
+}

@@ -1,6 +1,6 @@
 local Job = require('plenary.job')
 
-function Git_commit()
+function GitCommit()
   local message = vim.fn.input('Type commit message and press Enter: ')
   Job:new({
     command = 'git',
@@ -23,7 +23,7 @@ function Git_commit()
   }):start()
 end
 
-function Git_push()
+function GitPush()
   Job:new({
     command = 'git',
     args = { 'push' },

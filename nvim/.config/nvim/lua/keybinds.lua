@@ -1,4 +1,5 @@
 require('functions.git')
+require('functions.copilot')
 
 vim.api.nvim_set_keymap('n', '<leader>fs', ':Telescope grep_string<CR>', { noremap = true, desc = '[f]ind [s]tring' })
 vim.api.nvim_set_keymap('n', '<leader>fa', ':Telescope live_grep<CR>', { noremap = true, desc = '[f]ind [s]tring' })
@@ -6,10 +7,10 @@ vim.api.nvim_set_keymap('n', '<leader>ff', ':Telescope find_files<CR>', { norema
 
 vim.api.nvim_set_keymap('n', '<leader>Gcs', ':Telescope git_commits<CR>', { noremap = true, desc = '[G]it [c]ommits' })
 vim.api.nvim_set_keymap('n', '<leader>Gb', ':Telescope git_branches<CR>', { noremap = true, desc = '[G]it [b]ranches' })
-vim.keymap.set('n', '<leader>Gp', Git_push, { noremap = true, desc = '[G]it [p]ush' })
+vim.keymap.set('n', '<leader>Gp', GitPush, { noremap = true, desc = '[G]it [p]ush' })
 vim.api.nvim_set_keymap('n', '<leader>Gh', ':Gitsigns toggle_current_line_blame<CR>',
     { noremap = true, desc = '[G]it [h]istory' })
-vim.keymap.set('n', '<leader>Gc', Git_commit, { noremap = true, silent = true, desc = '[g]it [c]ommit' })
+vim.keymap.set('n', '<leader>Gc', GitCommit, { noremap = true, silent = true, desc = '[g]it [c]ommit' })
 
 vim.api.nvim_set_keymap('n', '<C-f>', ':Telescope current_buffer_fuzzy_find<CR>', { noremap = true, desc = '[F]ind' })
 
@@ -33,3 +34,5 @@ vim.keymap.set('n', '<C-Q>', ':bd<CR>', { noremap = true, desc = '[q]uit current
 
 vim.keymap.set('n', '<leader>!', 'za', { noremap = true, desc = 'toggle fold under cursor', silent = true })
 vim.keymap.set('n', '<leader>.', 'zA', { noremap = true, desc = 'toggle all fold in file', silent = true })
+
+vim.keymap.set('n', '<leader>tcp', ToggleCopilot, { noremap = true, desc = '[t]oggle [c]o[p]ilot', silent = true })

@@ -1,10 +1,10 @@
 return {
-  'nvim-treesitter/nvim-treesitter',
-  tag = 'v0.9.2',
-  build = ':TSUpdate',
+  "nvim-treesitter/nvim-treesitter",
+  tag = "v0.9.2",
+  build = ":TSUpdate",
   config = function()
-    require('nvim-treesitter.configs').setup({
-      build = ':TSUpdate',
+    require("nvim-treesitter.configs").setup({
+      build = ":TSUpdate",
       ensure_installed = {
         "markdown",
         "rust",
@@ -44,8 +44,8 @@ return {
           node_incremental = "<CR>",
           scope_incremental = "<TAB>",
           node_decremental = "<S-TAB>",
-        }
-      }
+        },
+      },
     })
   end,
 }

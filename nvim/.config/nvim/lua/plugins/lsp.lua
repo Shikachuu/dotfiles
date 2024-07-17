@@ -2,12 +2,36 @@ return {
   "b0o/schemastore.nvim",
   {
     "williamboman/mason.nvim",
-    config = function() require('mason').setup() end,
+    cmd = "Mason",
+    config = function(_, opts)
+      require("mason").setup(opts)
+      local mr = require("mason-registry")
+      local function ensure_installed()
+        for _, tool in ipairs(opts.ensure_installed) do
+          local p = mr.get_package(tool)
+          if not p:is_installed() then
+            p:install()
+          end
+        end
+      end
+      if mr.refresh then
+        mr.refresh(ensure_installed)
+      else
+        ensure_installed()
+      end
+    end,
+    build = ":MasonUpdate",
+    opts = {
+      ensure_installed = {
+        "stylua",
+        "prettier",
+      },
+    },
   },
   {
     "williamboman/mason-lspconfig.nvim",
     config = function()
-      local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
+      local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
       lsp_capabilities.textDocument.foldingRandge = { dynamicRegistration = true }
       local settings = {}
       local default_setup = function(server)
@@ -26,7 +50,7 @@ return {
         if server == "jsonls" then
           settings = {
             json = {
-              schemas = require('schemastore').json.schemas(),
+              schemas = require("schemastore").json.schemas(),
               validate = { enable = true },
             },
           }
@@ -41,20 +65,22 @@ return {
                 -- Avoid TypeError: Cannot read properties of undefined (reading 'length')
                 url = "",
               },
-              schemas = require('schemastore').yaml.schemas(),
+              schemas = require("schemastore").yaml.schemas(),
             },
           }
         end
 
-        require('lspconfig')[server].setup({
+        require("lspconfig")[server].setup({
           capabilities = lsp_capabilities,
           settings = settings,
           handlers = {
             ["textDocument/foldingRange"] = function(_, _, result)
-              if not result then return end
+              if not result then
+                return
+              end
               vim.lsp.util.set_fold(result)
-            end
-          }
+            end,
+          },
         })
       end
 
@@ -66,12 +92,11 @@ return {
           "yamlls",
           "sqls",
           "tsserver",
-          "rust_analyzer"
+          "rust_analyzer",
         },
-        handlers = { default_setup }
+        handlers = { default_setup },
       })
     end,
-
   },
   "neovim/nvim-lspconfig",
   {

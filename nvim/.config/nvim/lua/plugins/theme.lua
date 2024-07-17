@@ -13,8 +13,8 @@ return {
           variant = "auto",
         },
         extensions = {
-          mini = true
-        }
+          mini = true,
+        },
       })
 
       vim.cmd("colorscheme cyberdream")

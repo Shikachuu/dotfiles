@@ -15,7 +15,7 @@ return {
     "hrsh7th/nvim-cmp",
     dependencies = { "neovim/nvim-lspconfig", "saadparwaiz1/cmp_luasnip" },
     config = function()
-      local cmp = require('cmp')
+      local cmp = require("cmp")
       cmp.setup({
         window = {
           completion = {
@@ -48,17 +48,17 @@ return {
         snippet = {
           expand = function(args)
             require("luasnip").lsp_expand(args.body)
-          end
+          end,
         },
         sources = {
-          { name = 'nvim_lsp' },
-          { name = 'luasnip' },
+          { name = "nvim_lsp" },
+          { name = "luasnip" },
         },
         mapping = cmp.mapping.preset.insert({
           -- Enter key confirms completion item
-          ['<CR>'] = cmp.mapping.confirm({ select = false }),
+          ["<CR>"] = cmp.mapping.confirm({ select = false }),
           -- Ctrl + space triggers completion menu
-          ['<C-Space>'] = cmp.mapping.complete(),
+          ["<C-Space>"] = cmp.mapping.complete(),
         }),
       })
     end,

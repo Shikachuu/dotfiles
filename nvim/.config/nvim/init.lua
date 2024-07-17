@@ -17,16 +17,16 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 -- Add vim-opts
-require('opts')
+require("opts")
 
 -- Add dependencies
-require('lazy').setup('plugins')
+require("lazy").setup("plugins")
 
 -- Add keybinds
-require('keybinds')
+require("keybinds")
 
 -- Add autocommands
-require('autocommands')
+require("autocommands")
 
 if vim.loop.os_uname().sysname == "Darwin" then
   vim.cmd([[set rtp+=$HOMEBREW_PREFIX/opt/fzf]])

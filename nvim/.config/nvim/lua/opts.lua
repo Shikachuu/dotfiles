@@ -14,7 +14,7 @@ vim.opt.clipboard = "unnamedplus"
 vim.opt.undofile = true
 vim.opt.breakindent = true
 vim.opt.list = true
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
 -- Serach config
 vim.opt.hlsearch = true
@@ -35,8 +35,8 @@ vim.opt.backspace = { "indent", "eol", "start" }
 
 vim.opt.foldlevelstart = 99
 
-vim.diagnostic.config {
-    float = { border = "rounded"  },
-}
+vim.diagnostic.config({
+  float = { border = "rounded" },
+})
 
 -- vim: ts=2 sts=2 sw=2 et

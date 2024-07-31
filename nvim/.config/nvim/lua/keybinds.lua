@@ -4,6 +4,7 @@ require("functions.copilot")
 vim.api.nvim_set_keymap("n", "<leader>fs", ":Telescope grep_string<CR>", { noremap = true, desc = "[f]ind [s]tring" })
 vim.api.nvim_set_keymap("n", "<leader>fa", ":Telescope live_grep<CR>", { noremap = true, desc = "[f]ind [s]tring" })
 vim.api.nvim_set_keymap("n", "<leader>ff", ":Telescope find_files<CR>", { noremap = true, desc = "[f]ind [f]iles" })
+vim.api.nvim_set_keymap("n", "<leader>fb", ":Telescope file_browser<CR>", { noremap = true, desc = "[f]ind [b]rowser" })
 
 vim.api.nvim_set_keymap("n", "<leader>Gcs", ":Telescope git_commits<CR>", { noremap = true, desc = "[G]it [c]ommits" })
 vim.api.nvim_set_keymap("n", "<leader>Gb", ":Telescope git_branches<CR>", { noremap = true, desc = "[G]it [b]ranches" })

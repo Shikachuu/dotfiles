@@ -22,7 +22,9 @@ brew "stow"
 brew "yq"
 brew "zoxide"
 brew "jesseduffield/lazygit/lazygit"
+cask "firefox@beta"
 cask "kitty"
+cask "postman"
 cask "rectangle"
 
 mas "AdGuard for Safari", id: 1440147259

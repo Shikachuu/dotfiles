@@ -4,7 +4,7 @@ EDITOR='nvim'
 HISTCONTROL=ignoreboth
 HISTSIZE=1000
 HISTFILESIZE=2000
-PATH="$HOME/.arkade/bin/:/usr/bin:$PATH"
+PATH="$HOME/.arkade/bin/:/usr/bin:$HOME/.local/bin:$PATH"
 
 # Default override
 alias ls='ls -h --color=auto'
@@ -44,13 +44,6 @@ alias gtoday='git log --since=midnight --branches --no-merges --pretty=format:"%
 alias gbcleanmr="git branch --merged origin/master | xargs git branch -d"
 alias gbcleanmn="git branch --merged origin/main | xargs git branch -d"
 
-# Container commands
-alias pm='podman'
-alias cr='podman run --rm -it'
-alias node='podman run --rm -it --init -v $HOME/pm-cache/npm/:/root/:Z -v $PWD:/app:Z -w /app --network host node $@'
-alias npm='podman run --rm -it --init -v $HOME/pm-cache/npm/:/root/:Z -v $PWD:/app:Z -w /app --network host npm $@'
-alias npx='podman run --rm -it --init -v $HOME/pm-cache/npm/:/root/:Z -v $PWD:/app:Z -w /app --network host npx $@'
-
 # Functions
 # Copies the 1st argument to the clipboard using wl-copy or pbcopy
 function ctc() {
@@ -73,6 +66,24 @@ function pfc() {
         echo "No clipboard command found"
     fi
 }
+
+function get_container_runtime() {
+    if [ -x "$(command -v podman)" ]; then
+        alias cr='podman'
+    elif [ -x "$(command -v docker)" ]; then
+        alias cr='docker'
+    else
+        echo "No container runtime found"
+    fi
+}
+
+# Container commands
+get_container_runtime
+alias crit='cr run --rm -it'
+alias node='cr run --rm -it -v $HOME/pm-cache/npm/:/root/:Z -v $PWD:/app:Z -w /app --network host node:lts node $@'
+alias npm='cr run --rm -it -v $HOME/pm-cache/npm/:/root/:Z -v $PWD:/app:Z -w /app --network host node:lts npm $@'
+alias npx='cr run --rm -it -v $HOME/pm-cache/npm/:/root/:Z -v $PWD:/app:Z -w /app --network host node:lts npx $@'
+alias bun='cr run --rm -it -v $PWD:/app:Z -w /app --network host oven/bun:1-alpine bun $@'
 
 # Flatpak
 alias flatpak-export='flatpak list --app --columns=origin,application | tail -n +1'

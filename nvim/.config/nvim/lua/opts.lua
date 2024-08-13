@@ -6,6 +6,7 @@ vim.opt.fileencoding = "utf-8"
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.showmode = false
+vim.opt.showcmd = true
 vim.opt.termguicolors = true
 vim.opt.pumblend = 0
 
@@ -34,6 +35,8 @@ vim.opt.scrolloff = 5
 vim.opt.backspace = { "indent", "eol", "start" }
 
 vim.opt.foldlevelstart = 99
+
+vim.opt.title = true
 
 vim.diagnostic.config({
   float = { border = "rounded" },

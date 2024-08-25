@@ -92,7 +92,6 @@ return {
           "yamlls",
           "sqls",
           "tsserver",
-          "rust_analyzer",
           "terraformls",
         },
         handlers = { default_setup },

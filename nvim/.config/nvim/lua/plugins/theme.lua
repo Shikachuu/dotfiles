@@ -12,8 +12,14 @@ return {
         theme = {
           variant = "auto",
         },
+        options = {
+          theme = "auto",
+        },
         extensions = {
           mini = true,
+          gitsigns = true,
+          lazy = true,
+          treesitter = true,
         },
       })
 

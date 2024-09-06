@@ -91,7 +91,7 @@ return {
           "jsonls",
           "yamlls",
           "sqls",
-          "tsserver",
+          "vtsls",
           "terraformls",
         },
         handlers = { default_setup },

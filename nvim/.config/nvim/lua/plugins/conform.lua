@@ -17,6 +17,9 @@ return {
         markdown = { "prettier" },
         scss = { "prettier" },
         yaml = { "prettier" },
+        terraform = { "tfmt" },
+        hcl = { "tfmt" },
+        tf = { "tfmt" },
       },
 
       format_after_save = function()
@@ -38,6 +41,12 @@ return {
     -- Override prettier's default indent type
     require("conform").formatters.prettier = {
       prepend_args = { "--tab-width", "2" },
+    }
+
+    require("conform").formatters.tfmt = {
+      command = "terraform",
+      args = { "fmt", "-" },
+      stdin = true,
     }
 
     -- Toggle format on save

@@ -66,6 +66,7 @@ return {
                 url = "",
               },
               schemas = require("schemastore").yaml.schemas(),
+              validate = true,
             },
           }
         end
@@ -93,6 +94,7 @@ return {
           "sqls",
           "vtsls",
           "terraformls",
+          "vacuum",
         },
         handlers = { default_setup },
       })

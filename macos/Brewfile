@@ -1,6 +1,7 @@
 tap "homebrew/bundle"
 tap "jesseduffield/lazygit"
 tap "nikitabobko/tap"
+tap "armcord/armcord"
 
 brew "bash"
 brew "bash-completion"
@@ -26,6 +27,7 @@ cask "firefox@beta"
 cask "kitty"
 cask "postman"
 cask "rectangle"
+cask "armcord"
 
 mas "AdGuard for Safari", id: 1440147259
 mas "Bitwarden", id: 1352778147

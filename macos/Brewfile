@@ -18,6 +18,7 @@ brew "neovim"
 brew "node"
 brew "postgresql@14"
 brew "ripgrep"
+brew "rustup"
 brew "starship"
 brew "stow"
 brew "yq"
@@ -28,6 +29,7 @@ cask "kitty"
 cask "postman"
 cask "rectangle"
 cask "armcord"
+cask "zed"
 
 mas "AdGuard for Safari", id: 1440147259
 mas "Bitwarden", id: 1352778147

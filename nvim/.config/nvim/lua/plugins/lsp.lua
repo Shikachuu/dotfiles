@@ -95,6 +95,7 @@ return {
           "vtsls",
           "terraformls",
           "vacuum",
+          "biome",
         },
         handlers = { default_setup },
       })

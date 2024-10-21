@@ -9,6 +9,8 @@ return {
       table.insert(vimgrep_arguments, "--hidden")
       table.insert(vimgrep_arguments, "--glob")
       table.insert(vimgrep_arguments, "!**/.git/**")
+      table.insert(vimgrep_arguments, "--glob")
+      table.insert(vimgrep_arguments, "!**/node_modules/**")
       require("telescope").setup({
         defaults = {
           vimgrep_arguments = vimgrep_arguments,
@@ -21,6 +23,8 @@ return {
               "--hidden",
               "--glob",
               "!**/.git/**",
+              "--glob",
+              "!**/node_modules/**",
             },
           },
         },

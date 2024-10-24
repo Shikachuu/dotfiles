@@ -97,6 +97,7 @@ return {
           "terraformls",
           "vacuum",
           "biome",
+          "tailwindcss",
         },
         handlers = { default_setup },
       })

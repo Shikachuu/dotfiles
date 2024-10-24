@@ -3,25 +3,35 @@ return {
   event = "BufReadPre",
   config = function()
     vim.g.disable_autoformat = false
+
+    local function use_web_formatter()
+      local biome_config_pattern = require("lspconfig.util").root_pattern("biome.json", "biome.jsonc")
+      local has_biome_file = biome_config_pattern(vim.fn.getcwd()) ~= nil
+      if require("conform").get_formatter_info("biome") and has_biome_file then
+        return { "biome" }
+      else
+        return { "prettier" }
+      end
+    end
+
     require("conform").setup({
       formatters_by_ft = {
-        css = { "prettier" },
+        css = use_web_formatter,
         go = { "gofmt" },
-        html = { "prettier" },
-        javascript = { "prettier" },
-        typescript = { "prettier" },
-        typescriptreact = { "prettier" },
-        javascriptreact = { "prettier" },
-        json = { "prettier" },
+        html = use_web_formatter,
+        javascript = use_web_formatter,
+        typescript = use_web_formatter,
+        typescriptreact = use_web_formatter,
+        javascriptreact = use_web_formatter,
+        json = use_web_formatter,
         lua = { "stylua" },
         markdown = { "prettier" },
-        scss = { "prettier" },
-        yaml = { "prettier" },
+        scss = use_web_formatter,
+        yaml = use_web_formatter,
         terraform = { "tfmt" },
         hcl = { "tfmt" },
         tf = { "tfmt" },
       },
-
       format_after_save = function()
         if vim.g.disable_autoformat then
           return

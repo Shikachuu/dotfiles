@@ -74,6 +74,7 @@ return {
         require("lspconfig")[server].setup({
           capabilities = lsp_capabilities,
           settings = settings,
+
           handlers = {
             ["textDocument/foldingRange"] = function(_, _, result)
               if not result then

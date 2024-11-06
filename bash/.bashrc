@@ -83,7 +83,7 @@ alias crit='cr run --rm -it'
 alias node='cr run --rm -it -v $HOME/pm-cache/npm/:/root/:Z -v $PWD:/app:Z -w /app --network host node:lts node $@'
 alias npm='cr run --rm -it -v $HOME/pm-cache/npm/:/root/:Z -v $PWD:/app:Z -w /app --network host node:lts npm $@'
 alias npx='cr run --rm -it -v $HOME/pm-cache/npm/:/root/:Z -v $PWD:/app:Z -w /app --network host node:lts npx $@'
-alias bun='cr run --rm -it -v $PWD:/app:Z -w /app --network host oven/bun:1-alpine bun $@'
+alias bun='cr run --rm -it -v $PWD:/app:Z -w /app --network host oven/bun:1-debian bun $@'
 
 # Flatpak
 alias flatpak-export='flatpak list --app --columns=origin,application | tail -n +1'

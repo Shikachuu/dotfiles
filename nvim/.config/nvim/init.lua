@@ -20,7 +20,11 @@ vim.g.maplocalleader = " "
 require("opts")
 
 -- Add dependencies
-require("lazy").setup("plugins")
+require("lazy").setup("plugins", {
+  change_detection = {
+    enabled = false,
+  },
+})
 
 -- Add keybinds
 require("keybinds")

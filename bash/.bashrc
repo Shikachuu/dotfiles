@@ -97,3 +97,5 @@ eval "$(starship init bash)"
 eval "$(zoxide init bash)"
 source <(arkade completion bash)
 source <(kubectl completion bash)
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"

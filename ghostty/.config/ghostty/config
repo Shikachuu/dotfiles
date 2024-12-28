@@ -1,0 +1,24 @@
+config-file = ./cyberdream
+
+quit-after-last-window-closed = true
+gtk-single-instance = true
+
+mouse-hide-while-typing = true
+shell-integration-features = cursor,sudo,title
+
+font-family = JetBrainsMono NerdFont
+font-size = 13
+
+clipboard-read = allow
+clipboard-write = allow
+
+cursor-style = block
+cursor-style-blink = true
+cursor-click-to-move = true
+
+background-opacity = 0.95
+background-blur-radius = 60
+
+window-decoration = true
+macos-titlebar-style = tabs
+adw-toolbar-style = raised-border

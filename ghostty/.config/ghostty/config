@@ -1,5 +1,9 @@
+# https://ghostty.org/docs/config/reference
+
+# Import the cyberdream theme
 config-file = ./cyberdream
 
+# Set window behavior to be as close as possible both in mac and linux
 quit-after-last-window-closed = true
 gtk-single-instance = true
 
@@ -9,6 +13,7 @@ shell-integration-features = cursor,sudo,title
 font-family = JetBrainsMono NerdFont
 font-size = 13
 
+# Set clipboard permissions for mac
 clipboard-read = allow
 clipboard-write = allow
 
@@ -19,6 +24,18 @@ cursor-click-to-move = true
 background-opacity = 0.85
 background-blur-radius = 30
 
+# Set the window decoration to be as close as possible both in mac and linux
 window-decoration = true
 macos-titlebar-style = tabs
 adw-toolbar-style = raised-border
+
+# Keybindings
+# `unconsumed` = the keybinding is not consumed it will be passed to the shell too
+# directions = up, down, left, right or for navigation top, bottom, left, right
+# https://ghostty.org/docs/config/keybind/reference
+keybind = unconsumed:ctrl+shift+s=new_split:right
+keybind = unconsumed:ctrl+shift+d=new_split:up
+keybind = unconsumed:ctrl+up=goto_split:top
+keybind = unconsumed:ctrl+down=goto_split:bottom
+keybind = unconsumed:ctrl+left=goto_split:left
+keybind = unconsumed:ctrl+right=goto_split:right

@@ -16,8 +16,8 @@ cursor-style = block
 cursor-style-blink = true
 cursor-click-to-move = true
 
-background-opacity = 0.95
-background-blur-radius = 60
+background-opacity = 0.85
+background-blur-radius = 30
 
 window-decoration = true
 macos-titlebar-style = tabs

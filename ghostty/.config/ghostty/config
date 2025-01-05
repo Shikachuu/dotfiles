@@ -8,7 +8,7 @@ quit-after-last-window-closed = true
 gtk-single-instance = true
 
 mouse-hide-while-typing = true
-shell-integration-features = cursor,sudo,title
+shell-integration-features = cursor,title
 
 font-family = JetBrainsMono NerdFont
 font-size = 13

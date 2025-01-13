@@ -1,9 +1,9 @@
 [credential "https://github.com"]
     helper = 
-    helper = !~/.arkade/bin/gh auth git-credential
+    helper = !$(which gh) auth git-credential
 [credential "https://gist.github.com"]
     helper = 
-    helper = !~/.arkade/bin/gh auth git-credential
+    helper = !$(which gh) auth git-credential
 [user]
     name = Czékus Máté
     email = mate@picloud.hu

@@ -4,7 +4,7 @@ EDITOR='nvim'
 HISTCONTROL=ignoreboth
 HISTSIZE=1000
 HISTFILESIZE=2000
-PATH="$HOME/.arkade/bin/:/usr/bin:$HOME/.local/bin:$PATH"
+PATH="$VOLTA_HOME/bin:$HOME/.arkade/bin/:/usr/bin:$HOME/.local/bin:$PATH"
 
 # Default override
 alias ls='ls -h --color=auto'
@@ -33,11 +33,6 @@ alias cd2='cd ../..'
 alias compress="time tar -I 'zstd -8 -v' -cf"
 alias k=kubectl
 complete -F __start_kubectl k
-alias ark=arkade
-complete -F __start_arkade ark
-if [[ $TERM == "xterm-kitty" ]]; then
-    alias ssh="kitty +kitten ssh"
-fi
 
 # Git commands
 alias gtoday='git log --since=midnight --branches --no-merges --pretty=format:"%t%C(green)%d %C(magenta)%an %C(default)%cr: %C(bold)%s"'
@@ -95,7 +90,5 @@ alias flatpak-import='xargs -n2 flatpak install -y'
 [[ -r "/usr/share/bash-completion/bash_completion" ]] && source "/usr/share/bash-completion/bash_completion"
 eval "$(starship init bash)"
 eval "$(zoxide init bash)"
-source <(arkade completion bash)
 source <(kubectl completion bash)
 export VOLTA_HOME="$HOME/.volta"
-export PATH="$VOLTA_HOME/bin:$PATH"

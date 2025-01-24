@@ -75,10 +75,6 @@ function get_container_runtime() {
 # Container commands
 get_container_runtime
 alias crit='cr run --rm -it'
-alias node='cr run --rm -it -v $HOME/pm-cache/npm/:/root/:Z -v $PWD:/app:Z -w /app --network host node:lts node $@'
-alias npm='cr run --rm -it -v $HOME/pm-cache/npm/:/root/:Z -v $PWD:/app:Z -w /app --network host node:lts npm $@'
-alias npx='cr run --rm -it -v $HOME/pm-cache/npm/:/root/:Z -v $PWD:/app:Z -w /app --network host node:lts npx $@'
-alias bun='cr run --rm -it -v $PWD:/app:Z -w /app --network host oven/bun:1-debian bun $@'
 
 # Flatpak
 alias flatpak-export='flatpak list --app --columns=origin,application | tail -n +1'
@@ -91,4 +87,5 @@ alias flatpak-import='xargs -n2 flatpak install -y'
 eval "$(starship init bash)"
 eval "$(zoxide init bash)"
 source <(kubectl completion bash)
-export VOLTA_HOME="$HOME/.volta"
+eval "$(mise completion bash)"
+eval "$(mise activate bash)"

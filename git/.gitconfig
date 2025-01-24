@@ -5,13 +5,12 @@
     helper = 
     helper = !$(which gh) auth git-credential
 [user]
-    name = Czékus Máté
+    name = Máté Czékus
     email = mate@picloud.hu
 [includeIf "gitdir:~/Documents/work/"]
     path = .gitconfig-work
 [core]
     autocrlf = input
-    excludesfile = /home/shika/.config/git/.gitignore
 [push]
     autoSetupRemote = true
 [init]

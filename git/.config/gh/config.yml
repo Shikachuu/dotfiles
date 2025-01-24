@@ -10,8 +10,7 @@ pager:
 aliases:
   co: pr checkout
   reop: repo view --web
-  "pr bwork": pr create -a @me --reviewer="adroit-marton,kovapatrik"
-  "pr fwork": pr create -a @me
+  "pr work": pr create -a @me
 # The path to a unix socket through which send HTTP connections. If blank, HTTP traffic will be handled by net/http.DefaultTransport.
 http_unix_socket:
 # What web browser gh should use when opening URLs. If blank, will refer to environment.

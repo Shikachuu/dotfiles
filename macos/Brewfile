@@ -14,7 +14,6 @@ brew "go"
 brew "htop"
 brew "jq"
 brew "kubernetes-cli"
-brew "libpq", link: true unless system "test", "-f ~/.work"
 brew "lima"
 brew "mas"
 brew "mise"
@@ -28,18 +27,26 @@ brew "zoxide"
 brew "jesseduffield/lazygit/lazygit"
 
 cask "bambu-studio"
-cask "datagrip" unless system "test", "-f ~/.work"
+cask "datagrip"
 cask "firefox@beta"
 cask "font-jetbrains-mono-nerd-font"
 cask "ghostty"
 cask "legcord"
-cask "postman" unless system "test", "-f ~/.work"
 cask "rectangle"
-cask "sdm" unless system "test", "-f ~/.work"
 cask "spotify"
 cask "zed"
 
 mas "AdGuard for Safari", id: 1440147259
 mas "Bitwarden", id: 1352778147
-mas "Slack", id: 803453959 unless system "test", "-f ~/.work"
-mas "Photomator", id: 1444636541 unless system "test", "-f ~/.personal"
+
+if File.exist?(File.expand_path("~/.work"))
+    brew "libpq", link: true
+    cask "postman"
+    cask "sdm"
+    mas "Slack", id: 803453959
+end
+
+if File.exist?(File.expand_path("~/.personal"))
+    mas "Photomator", id: 1444636541
+end
+

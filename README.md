@@ -23,7 +23,8 @@ stow -v -R -t $HOME <package>
 - `bash`
 - `git`
 - `nvim`
-- `kitty`
+- `ghostty`
+- `mise`
 - `linux` (for Linux specific configurations)
 - `macos` (for macOS specific configurations)
 

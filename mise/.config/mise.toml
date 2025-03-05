@@ -1,0 +1,4 @@
+[tools]
+node = "latest"
+terraform = "1"
+

@@ -4,7 +4,7 @@ EDITOR='nvim'
 HISTCONTROL=ignoreboth
 HISTSIZE=1000
 HISTFILESIZE=2000
-PATH="$VOLTA_HOME/bin:$HOME/.arkade/bin/:/usr/bin:$HOME/.local/bin:$PATH"
+PATH="/usr/bin:$HOME/.local/bin:$PATH"
 
 # Default override
 alias ls='ls -h --color=auto'
@@ -31,6 +31,7 @@ alias fcat='cat $(fzf)'
 alias fed='nvim $(fzf)'
 alias cd2='cd ../..'
 alias compress="time tar -I 'zstd -8 -v' -cf"
+alias lg='lazygit'
 alias k=kubectl
 complete -F __start_kubectl k
 

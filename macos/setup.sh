@@ -14,3 +14,11 @@ defaults write NSGlobalDomain NSAutomaticInlinePredictionEnabled -bool false
 defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
 defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
 defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+
+brew_bash_path=$(ls "$(brew --prefix)/bin/bash")
+
+if ! grep -Fxq "$brew_bash_path" /etc/shells; then
+  echo "$brew_bash_path" | sudo tee -a /etc/shells
+  chsh -s "$(brew --prefix)/bin/bash"
+fi
+

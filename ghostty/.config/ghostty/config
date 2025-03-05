@@ -9,6 +9,7 @@ gtk-single-instance = true
 
 mouse-hide-while-typing = true
 shell-integration-features = cursor,title
+shell-integration = bash
 
 font-family = JetBrainsMono NerdFont
 font-size = 13

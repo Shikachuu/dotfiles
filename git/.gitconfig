@@ -25,6 +25,7 @@
     co = checkout
     aa = add --all
     ca = commit --amend
+    fp = push --force-with-lease
     call = !git aa && git c -s -m
     dropl = reset --hard HEAD~1
     ignore = update-index --assume-unchanged

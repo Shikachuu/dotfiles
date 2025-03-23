@@ -24,6 +24,7 @@ return {
     opts = {
       ensure_installed = {
         "stylua",
+        "golangci-lint",
         "prettier",
       },
     },
@@ -98,6 +99,7 @@ return {
           "vacuum",
           "biome",
           "tailwindcss",
+          "rust_analyzer",
         },
         handlers = { default_setup },
       })

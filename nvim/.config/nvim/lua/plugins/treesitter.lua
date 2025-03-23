@@ -28,6 +28,7 @@ return {
         "git_rebase",
         "gitcommit",
         "just",
+        "swift",
       },
       sync_install = true,
       auto_install = true,

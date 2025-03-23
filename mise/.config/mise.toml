@@ -1,4 +1,5 @@
 [tools]
 node = "latest"
 terraform = "1"
+rust = { version = "latest", target = "default" }
 

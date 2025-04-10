@@ -47,6 +47,8 @@ if File.exist?(File.expand_path("~/.work"))
 end
 
 if File.exist?(File.expand_path("~/.personal"))
+    tap "LizardByte/homebrew"
+    brew "sunshine"
     mas "Photomator", id: 1444636541
 end
 

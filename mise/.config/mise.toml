@@ -1,5 +1,7 @@
+[env]
+MISE_EXPERIMENTAL = true
+
 [tools]
 node = "latest"
 terraform = "1"
-rust = { version = "latest", target = "default" }
 

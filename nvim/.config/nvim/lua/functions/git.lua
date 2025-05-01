@@ -39,6 +39,7 @@ function M.push()
 end
 
 function M.commit_popup()
+  local chat = require("CopilotChat")
   -- Create a commit message popup window
   local width = math.floor(vim.o.columns * 0.8)
   local height = math.floor(vim.o.lines * 0.6)
@@ -67,6 +68,34 @@ function M.commit_popup()
   end
 
   api.nvim_buf_set_lines(buf, 0, -1, false, initial_content)
+
+  chat.ask(
+    [[
+      Write commit message for the change with Conventional Commits convention.
+      Keep the title under 50 characters and wrap message at 72 characters.
+      Format as a gitcommit code block.
+      Only respond with the commit message.
+
+      > #git:staged
+      > #git:unstaged
+    ]],
+    {
+      model = "gpt-4o-mini",
+      headless = true,
+      callback = function(response)
+        if response then
+          local complete_commit = vim.split(response, "\n", { plain = true })
+          if #complete_commit > 2 then
+            complete_commit = vim.list_slice(complete_commit, 2, #complete_commit - 1)
+          end
+
+          local combined_output = vim.list_extend(complete_commit, initial_content)
+          api.nvim_buf_set_lines(buf, 0, -1, false, combined_output)
+        end
+        return response
+      end,
+    }
+  )
 
   -- Create window with rounded borders
   local win = api.nvim_open_win(buf, true, {

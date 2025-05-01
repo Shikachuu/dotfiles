@@ -91,3 +91,22 @@ vim.keymap.set("n", "<leader>!", "za", { noremap = true, desc = "toggle fold und
 vim.keymap.set("n", "<leader>.", "zA", { noremap = true, desc = "toggle all fold in file", silent = true })
 
 vim.keymap.set("n", "<leader>tcp", ToggleCopilot, { noremap = true, desc = "[t]oggle [c]o[p]ilot", silent = true })
+vim.keymap.set("n", "<leader>cpc", ":CopilotChat<CR>", { noremap = true, desc = "[c]o[p]ilot [c]hat", silent = true })
+vim.keymap.set(
+  "n",
+  "<leader>cpr",
+  ":CopilotChatReview<CR>",
+  { noremap = true, desc = "[c]o[p]ilot [r]eview", silent = true }
+)
+vim.keymap.set(
+  "n",
+  "<leader>cpgt",
+  ":CopilotChatGoTests<CR>",
+  { noremap = true, desc = "[c]o[p]ilot generate [g]o [t]est", silent = true }
+)
+vim.keymap.set(
+  "n",
+  "<leader>cpapi",
+  ":CopilotChatOpenAPIDocs<CR>",
+  { noremap = true, desc = "[c]o[p]ilot genrate [o]pen [api] docs", silent = true }
+)

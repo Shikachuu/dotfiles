@@ -1,4 +1,3 @@
-tap "homebrew/bundle"
 tap "buo/cask-upgrade"
 tap "jesseduffield/lazygit"
 tap "nikitabobko/tap"
@@ -42,8 +41,6 @@ mas "Refined GitHub", id: 1519867270
 
 if File.exist?(File.expand_path("~/.work"))
     brew "libpq", link: true
-    cask "postman"
-    cask "sdm"
     mas "Slack", id: 803453959
 end
 

@@ -4,7 +4,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
     local telescope = require("telescope.builtin")
     -- these will be buffer-local keybindings
     -- because they only work if you have an active language server
-    vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = event.buf })
+    vim.keymap.set("n", "K", function()
+      vim.lsp.buf.hover({ border = "rounded", max_height = 25, max_width = 120, focusable = false })
+    end, { buffer = event.buf, desc = "Hover", noremap = true, silent = true })
     vim.keymap.set("n", "<leader>gd", telescope.lsp_definitions, { buffer = event.buf, desc = "[g]oto [d]efinitions" })
     vim.keymap.set(
       "n",

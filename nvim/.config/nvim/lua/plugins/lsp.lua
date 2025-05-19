@@ -1,24 +1,14 @@
+local lsp_funcs = require("functions.lsp")
+
 return {
   "b0o/schemastore.nvim",
+  "neovim/nvim-lspconfig",
   {
     "williamboman/mason.nvim",
     cmd = "Mason",
     config = function(_, opts)
       require("mason").setup(opts)
-      local mr = require("mason-registry")
-      local function ensure_installed()
-        for _, tool in ipairs(opts.ensure_installed) do
-          local p = mr.get_package(tool)
-          if not p:is_installed() then
-            p:install()
-          end
-        end
-      end
-      if mr.refresh then
-        mr.refresh(ensure_installed)
-      else
-        ensure_installed()
-      end
+      lsp_funcs.mason_ensure_installed(opts.ensure_installed)
     end,
     build = ":MasonUpdate",
     opts = {
@@ -36,40 +26,14 @@ return {
       lsp_capabilities.textDocument.foldingRandge = { dynamicRegistration = true }
       local settings = {}
       local default_setup = function(server)
+        local schemastore = require("schemastore")
+
         if server == "gopls" then
-          settings = {
-            gopls = {
-              analyses = {
-                useany = true,
-                unusedvariable = true,
-              },
-              staticcheck = true,
-            },
-          }
-        end
-
-        if server == "jsonls" then
-          settings = {
-            json = {
-              schemas = require("schemastore").json.schemas(),
-              validate = { enable = true },
-            },
-          }
-        end
-
-        if server == "yamlls" then
-          settings = {
-            yaml = {
-              schemaStore = {
-                -- disable the built-in schemaStore support
-                enable = false,
-                -- Avoid TypeError: Cannot read properties of undefined (reading 'length')
-                url = "",
-              },
-              schemas = require("schemastore").yaml.schemas(),
-              validate = true,
-            },
-          }
+          settings = lsp_funcs.setup_gopls(settings)
+        elseif server == "jsonls" then
+          settings = lsp_funcs.setup_jsonls(settings, schemastore)
+        elseif server == "yamlls" then
+          settings = lsp_funcs.setup_yamlls(settings, schemastore)
         end
 
         require("lspconfig")[server].setup({
@@ -88,6 +52,7 @@ return {
       end
 
       require("mason-lspconfig").setup({
+        automatic_installation = true,
         ensure_installed = {
           "gopls",
           "lua_ls",
@@ -105,7 +70,6 @@ return {
       })
     end,
   },
-  "neovim/nvim-lspconfig",
   {
     "folke/lazydev.nvim",
     ft = "lua", -- only load on lua files

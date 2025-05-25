@@ -16,6 +16,7 @@ local function notify_on_exit(success_msg, error_prefix)
 end
 
 local function run_git_command(args, on_exit)
+  ---@diagnostic disable-next-line: missing-fields
   Job:new({
     command = "git",
     args = args,
@@ -140,7 +141,7 @@ function M.commit_popup()
 
     -- First add all files
     run_git_command({ "add", "-A" }, function()
-      -- Then commit with the provided message
+      ---@diagnostic disable-next-line: missing-fields
       Job:new({
         command = "git",
         args = { "commit", "-s", "-F", "-" },
@@ -155,7 +156,7 @@ function M.commit_popup()
   api.nvim_buf_set_keymap(
     buf,
     "n",
-    "<leader>cc",
+    "<leader>",
     [[<cmd>lua _G.__git_submit_commit()<CR>]],
     { noremap = true, silent = true, desc = "Submit commit" }
   )

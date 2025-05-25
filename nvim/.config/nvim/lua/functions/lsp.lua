@@ -44,6 +44,19 @@ M.setup_yamlls = function(settings, schemastore)
   return settings
 end
 
+---This function is called when setting up the helm language server
+---It configures the language server to use the yaml language server
+---@return table
+M.setup_helm_ls = function()
+  return {
+    ["helm-ls"] = {
+      yamlls = {
+        path = "yaml-language-server",
+      },
+    },
+  }
+end
+
 ---This function ensures that the specified linters are installed using Mason
 ---@param linters table List of linters to ensure are installed
 M.mason_ensure_installed = function(linters)

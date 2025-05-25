@@ -13,8 +13,8 @@ return {
     build = ":MasonUpdate",
     opts = {
       ensure_installed = {
-        "stylua",
         "golangci-lint",
+        "stylua",
         "prettier",
       },
     },
@@ -27,6 +27,7 @@ return {
       local settings = {}
       local default_setup = function(server)
         local schemastore = require("schemastore")
+        local lspconfig = require("lspconfig")
 
         if server == "gopls" then
           settings = lsp_funcs.setup_gopls(settings)
@@ -34,9 +35,11 @@ return {
           settings = lsp_funcs.setup_jsonls(settings, schemastore)
         elseif server == "yamlls" then
           settings = lsp_funcs.setup_yamlls(settings, schemastore)
+        elseif server == "helm_ls" then
+          settings = lsp_funcs.setup_helm_ls()
         end
 
-        require("lspconfig")[server].setup({
+        lspconfig[server].setup({
           capabilities = lsp_capabilities,
           settings = settings,
 
@@ -54,17 +57,18 @@ return {
       require("mason-lspconfig").setup({
         automatic_installation = true,
         ensure_installed = {
+          "biome",
           "gopls",
-          "lua_ls",
+          "helm_ls",
           "jsonls",
-          "yamlls",
+          "lua_ls",
+          "rust_analyzer",
           "sqls",
-          "vtsls",
+          "tailwindcss",
           "terraformls",
           "vacuum",
-          "biome",
-          "tailwindcss",
-          "rust_analyzer",
+          "vtsls",
+          "yamlls",
         },
         handlers = { default_setup },
       })

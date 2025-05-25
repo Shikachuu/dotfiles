@@ -3,6 +3,8 @@ return {
   {
     "L3MON4D3/LuaSnip",
     version = "v2.*",
+    lazy = true,
+    ft = { "go", "proto" },
     config = function()
       require("luasnip").config.set_config({
         history = true,
@@ -14,6 +16,8 @@ return {
   {
     "hrsh7th/nvim-cmp",
     dependencies = { "neovim/nvim-lspconfig", "saadparwaiz1/cmp_luasnip" },
+    lazy = true,
+    event = "InsertEnter",
     config = function()
       local cmp = require("cmp")
       cmp.setup({

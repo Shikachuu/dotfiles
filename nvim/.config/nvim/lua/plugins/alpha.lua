@@ -1,6 +1,8 @@
 return {
   "goolord/alpha-nvim",
   dependencies = { "kyazdani42/nvim-web-devicons" },
+  lazy = true, -- Don't load immediately at startup
+  event = "VimEnter", -- Load when Vim enters
   config = function()
     local dashboard = require("alpha.themes.dashboard")
 

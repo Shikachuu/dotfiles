@@ -3,6 +3,18 @@ return {
   {
     "CopilotC-Nvim/CopilotChat.nvim",
     branch = "main",
+    keys = {
+      { "<leader>cpc", "<cmd>CopilotChat<CR>", desc = "[c]o[p]ilot [c]hat", mode = { "n", "x" } },
+      { "<leader>cpr", "<cmd>CopilotChatReview<CR>", desc = "[c]o[p]ilot [r]eview", mode = { "n", "x" } },
+      { "<leader>cpgt", "<cmd>CopilotChatGoTests<CR>", desc = "[c]o[p]ilot generate [g]o [t]est", mode = { "n", "x" } },
+      {
+        "<leader>cpapi",
+        "<cmd>CopilotChatOpenAPIDocs<CR>",
+        desc = "[c]o[p]ilot genrate [o]pen [api] docs",
+        mode = { "n", "x" },
+      },
+      { "<leader>cpd", "<cmd>CopilotChatDocumentation<CR>", desc = "[c]o[p]ilot [d]ocument", mode = { "n", "x" } },
+    },
     dependencies = {
       { "github/copilot.vim" },
       { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper

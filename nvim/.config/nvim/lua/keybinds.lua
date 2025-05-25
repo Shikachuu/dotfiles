@@ -81,10 +81,6 @@ vim.keymap.set("n", "<C-S-Down>", ":m +1<CR>", { noremap = true, desc = "move li
 vim.keymap.set("n", "<leader>spv", ":vsplit<CR>", { noremap = true, desc = "[s][p]lit [v]ertical", silent = true })
 vim.keymap.set("n", "<leader>sph", ":split<CR>", { noremap = true, desc = "[s][p]lit [h]orizontal", silent = true })
 
-vim.keymap.set("x", "<leader>es", ":Refactor extract<CR>", { noremap = true, desc = "[e]xtract [s]cope" })
-vim.keymap.set("x", "<leader>ev", ":Refactor extract_var<CR>", { noremap = true, desc = "[e]xtract [v]ariable" })
-vim.keymap.set({ "n", "x" }, "<leader>iv", ":Refactor inline_var<CR>", { noremap = true, desc = "[i]line [v]ariable" })
-
 vim.keymap.set("n", "<C-Q>", ":bd<CR>", { noremap = true, desc = "[q]uit current tab", silent = true })
 
 vim.keymap.set("n", "<leader>!", "za", { noremap = true, desc = "toggle fold under cursor", silent = true })
@@ -95,29 +91,4 @@ vim.keymap.set(
   "<leader>tcp",
   require("functions.copilot").toggle,
   { noremap = true, desc = "[t]oggle [c]o[p]ilot", silent = true }
-)
-
-vim.keymap.set(
-  { "n", "x" },
-  "<leader>cpc",
-  ":CopilotChat<CR>",
-  { noremap = true, desc = "[c]o[p]ilot [c]hat", silent = true }
-)
-vim.keymap.set(
-  { "n", "x" },
-  "<leader>cpr",
-  ":CopilotChatReview<CR>",
-  { noremap = true, desc = "[c]o[p]ilot [r]eview", silent = true }
-)
-vim.keymap.set(
-  { "n", "x" },
-  "<leader>cpgt",
-  ":CopilotChatGoTests<CR>",
-  { noremap = true, desc = "[c]o[p]ilot generate [g]o [t]est", silent = true }
-)
-vim.keymap.set(
-  { "n", "x" },
-  "<leader>cpapi",
-  ":CopilotChatOpenAPIDocs<CR>",
-  { noremap = true, desc = "[c]o[p]ilot genrate [o]pen [api] docs", silent = true }
 )

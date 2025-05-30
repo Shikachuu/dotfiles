@@ -33,6 +33,7 @@ alias cd2='cd ../..'
 alias compress="time tar -I 'zstd -8 -v' -cf"
 alias lg='lazygit'
 alias k=kubectl
+alias ltree='find . | sed -e "s/[^-][^\/]*\//  |/g" -e "s/|\([^ ]\)/|-\1/"'
 complete -F __start_kubectl k
 
 # Git commands

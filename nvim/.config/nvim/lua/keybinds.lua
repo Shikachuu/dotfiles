@@ -1,5 +1,6 @@
+local copilot = require("functions.copilot")
 local git = require("functions.git")
-require("functions.copilot")
+local yamlls_crd = require("functions.yamlls_crd")
 
 vim.api.nvim_set_keymap(
   "n",
@@ -86,9 +87,11 @@ vim.keymap.set("n", "<C-Q>", ":bd<CR>", { noremap = true, desc = "[q]uit current
 vim.keymap.set("n", "<leader>!", "za", { noremap = true, desc = "toggle fold under cursor", silent = true })
 vim.keymap.set("n", "<leader>.", "zA", { noremap = true, desc = "toggle all fold in file", silent = true })
 
+vim.keymap.set("n", "<leader>tcp", copilot.toggle, { noremap = true, desc = "[t]oggle [c]o[p]ilot", silent = true })
+
 vim.keymap.set(
   "n",
-  "<leader>tcp",
-  require("functions.copilot").toggle,
-  { noremap = true, desc = "[t]oggle [c]o[p]ilot", silent = true }
+  "<leader>pcrd",
+  yamlls_crd.open_picker,
+  { noremap = true, desc = "[p]ick yaml [crd]", silent = true }
 )

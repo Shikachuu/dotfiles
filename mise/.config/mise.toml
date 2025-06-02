@@ -3,5 +3,6 @@ MISE_EXPERIMENTAL = true
 
 [tools]
 node = "latest"
+opentofu = "latest"
 terraform = "1"
 

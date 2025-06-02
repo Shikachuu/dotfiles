@@ -2,7 +2,9 @@
 MISE_EXPERIMENTAL = true
 
 [tools]
+azure-cli = "latest"
 node = "latest"
 opentofu = "latest"
 terraform = "1"
+tflint = "latest"
 

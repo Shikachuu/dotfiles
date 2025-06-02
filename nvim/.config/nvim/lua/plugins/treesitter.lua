@@ -1,6 +1,8 @@
 return {
   "nvim-treesitter/nvim-treesitter",
   build = ":TSUpdate",
+  lazy = false,
+  priority = 10,
   config = function()
     require("nvim-treesitter.configs").setup({
       build = ":TSUpdate",
@@ -59,4 +61,3 @@ return {
     ts_functions.setup_gotmpl()
   end,
 }
--- vim: ts=2 sts=2 sw=2 et

@@ -1,0 +1,94 @@
+{
+  "export type": {
+    "key": "exportType",
+    "prefix": "exptp",
+    "body": ["export type ${1:first} = {${2:second}}"],
+    "scope": "typescript,typescriptreact,javascript,javascriptreact"
+  },
+  "ts react functional component": {
+    "key": "typescriptReactArrowFunctionExportComponent",
+    "prefix": "rfc",
+    "body": [
+      "import React from \"react\"",
+      "",
+      "type ${1:${TM_FILENAME_BASE}}Props = {}",
+      "",
+      "export const ${1:${TM_FILENAME_BASE}}: React.FC<Props> = () => {",
+      "  return (",
+      "    <>${1:first}</>",
+      "  )",
+      "}"
+    ],
+    "description": "Creates a React Arrow Function Component with ES7 module system and TypeScript interface",
+    "scope": "typescript,typescriptreact,javascript,javascriptreact"
+  },
+  "useCallback": {
+    "key": "useCallback",
+    "prefix": "useCallbackSnippet",
+    "body": [
+      "useCallback(",
+      "  () => {",
+      "    ${1:first}",
+      "  },",
+      "  [${2:second}],",
+      ")",
+      ""
+    ],
+    "scope": "typescript,typescriptreact,javascript,javascriptreact"
+  },
+  "useContext": {
+    "key": "useContext",
+    "prefix": "useContextSnippet",
+    "body": ["const ${1:first} = useContext(${2:second})"],
+    "scope": "typescript,typescriptreact,javascript,javascriptreact"
+  },
+  "useEffect": {
+    "key": "useEffect",
+    "prefix": "useEffectSnippet",
+    "body": [
+      "useEffect(() => {",
+      "  ${1:first}",
+      "",
+      "  return () => {",
+      "    ${2:second}",
+      "  }",
+      "}, [${3:third}])",
+      ""
+    ],
+    "scope": "typescript,typescriptreact,javascript,javascriptreact"
+  },
+  "useReducer": {
+    "key": "useReducer",
+    "prefix": "useReducerSnippet",
+    "body": [
+      "const [state, dispatch] = useReducer(${1:first}, ${2:second}, ${3:third})"
+    ],
+    "scope": "typescript,typescriptreact,javascript,javascriptreact"
+  },
+  "useState": {
+    "key": "useState",
+    "prefix": "useStateSnippet",
+    "body": [
+      "const [${1:first}, set${1/(.*)/${1:/capitalize}/}] = useState(${2:second})"
+    ],
+    "scope": "typescript,typescriptreact,javascript,javascriptreact"
+  },
+  "return Result": {
+    "key": "returnResult",
+    "prefix": "rres",
+    "body": [": Result<${1:Ok}, ${2:Err}>"],
+    "scope": "typescript,typescriptreact,javascript,javascriptreact"
+  },
+  "return error": {
+    "key": "returnError",
+    "prefix": "rerr",
+    "body": ["return err(${1:error})"],
+    "scope": "typescript,typescriptreact,javascript,javascriptreact"
+  },
+  "return ok": {
+    "key": "returnOk",
+    "prefix": "rok",
+    "body": ["return ok(${1:ok})"],
+    "scope": "typescript,typescriptreact,javascript,javascriptreact"
+  }
+}

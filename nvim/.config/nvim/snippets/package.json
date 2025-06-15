@@ -1,25 +1,45 @@
 {
-    "name": "snippets",
-    "contributes": {
-        "snippets": [
-            {
-                "language": [
-                    "all"
-                ],
-                "path": "./all.json"
-            },
-            {
-                "language": [
-                    "go"
-                ],
-                "path": "./go.json"
-            },
-            {
-                "language": [
-                    "proto"
-                ],
-                "path": "./proto.json"
-            }
-        ]
-    }
+  "name": "snippets",
+  "contributes": {
+    "snippets": [
+      {
+        "language": [
+          "all"
+        ],
+        "path": "./all.json"
+      },
+      {
+        "language": [
+          "go"
+        ],
+        "path": "./go.json"
+      },
+      {
+        "language": [
+          "proto"
+        ],
+        "path": "./proto.json"
+      },
+      {
+        "language": [
+          "markdown",
+          "markdown.mdx"
+        ],
+        "path": "./markdown.json"
+      },
+      {
+        "language": [
+          "typescript",
+          "typescriptreact",
+          "javascript",
+          "javascriptreact"
+        ],
+        "path": "./js-ts-react.json"
+      },
+      {
+        "language": "dockerfile",
+        "path": "./dockerfile.json"
+      }
+    ]
+  }
 }

@@ -1,0 +1,92 @@
+{
+  "header 1": {
+    "prefix": "h1",
+    "body": ["# ${0}"],
+    "description": "Add header level 1"
+  },
+  "header 2": {
+    "prefix": "h2",
+    "body": ["## ${0}"],
+    "description": "Add header level 2"
+  },
+  "header 3": {
+    "prefix": "h3",
+    "body": ["### ${0}"],
+    "description": "Add header level 3"
+  },
+  "header 4": {
+    "prefix": "h4",
+    "body": ["#### ${0}"],
+    "description": "Add header level 4"
+  },
+  "header 5": {
+    "prefix": "h5",
+    "body": ["##### ${0}"],
+    "description": "Add header level 5"
+  },
+  "header 6": {
+    "prefix": "h6",
+    "body": ["###### ${0}"],
+    "description": "Add header level 6"
+  },
+  "links": {
+    "prefix": ["l", "link"],
+    "body": ["[${1:text}](${2:url}) ${0}"],
+    "description": "Add links"
+  },
+  "urls": {
+    "prefix": ["u", "url"],
+    "body": ["<${1}> ${0}"],
+    "description": "Add urls"
+  },
+  "images": {
+    "prefix": "img",
+    "body": ["![${1:alt text}](${2:path}) ${0}"],
+    "description": "Add images"
+  },
+  "insert table": {
+    "prefix": "table",
+    "body": [
+      "| ${1:Column1} | ${2:Column2} | ${3:Column3} |",
+      "| ------------- | -------------- | -------------- |",
+      "| ${4:Item1} | ${5:Item1} | ${6:Item1} |",
+      "${0}"
+    ],
+    "description": "Insert table with 2 rows and 3 columns. First row is heading."
+  },
+  "insert subscript": {
+    "prefix": "sub",
+    "body": ["${1}<sub>${0}"],
+    "description": "Create a subscript."
+  },
+  "insert superscript": {
+    "prefix": "sup",
+    "body": ["${1}<sup>${0}"],
+    "description": "Create a superscript."
+  },
+  "insert Note": {
+    "prefix": ["note", "n"],
+    "body": "> [!NOTE]\n> ",
+    "description": "Insert Note"
+  },
+  "insert Tip": {
+    "prefix": ["tip", "t"],
+    "body": "> [!TIP]\n> ",
+    "description": "Insert Tip"
+  },
+  "insert Important": {
+    "prefix": ["important", "imp"],
+    "body": "> [!IMPORTANT]\n> ",
+    "description": "Insert Important"
+  },
+  "insert Warning": {
+    "prefix": ["warning", "w"],
+    "body": "> [!WARNING]\n> ",
+    "description": "Insert Warning"
+  },
+  "insert Caution": {
+    "prefix": ["caution", "c"],
+    "body": "> [!CAUTION]\n> ",
+    "description": "Insert Caution"
+  }
+}

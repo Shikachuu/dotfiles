@@ -1,0 +1,53 @@
+{
+  "FROM": {
+    "prefix": "F",
+    "body": "FROM ${1:ubuntu}"
+  },
+  "RUN": {
+    "prefix": "R",
+    "body": ["RUN ${1:command}"]
+  },
+
+  "CMD": {
+    "prefix": "C",
+    "body": ["CMD ${1:command}"]
+  },
+
+  "COPY": {
+    "prefix": "cp",
+    "body": ["COPY ${1:src} ${2:dest}"]
+  },
+
+  "EXPOSE": {
+    "prefix": "exp",
+    "body": ["EXPOSE ${1:port}"]
+  },
+  "ENV": {
+    "prefix": "env",
+    "body": ["ENV ${1:key} ${2: value}"]
+  },
+  "ADD": {
+    "prefix": "a",
+    "body": ["ADD ${1:src} ${2:dst}"]
+  },
+  "ENTRYPOINT": {
+    "prefix": "ent",
+    "body": "ENTRYPOINT ${1:command}"
+  },
+  "VOLUME": {
+    "prefix": "v",
+    "body": "VOLUME [\"${1:path}\"]"
+  },
+  "USER": {
+    "prefix": "u",
+    "body": "USER ${1:name}"
+  },
+  "WORKDIR": {
+    "prefix": "w",
+    "body": "WORKDIR ${1:name}"
+  },
+  "LABEL": {
+    "prefix": "L",
+    "body": "LABEL ${1:label}=\"${2:value}\""
+  }
+}

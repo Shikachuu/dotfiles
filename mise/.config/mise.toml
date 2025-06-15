@@ -3,6 +3,7 @@ MISE_EXPERIMENTAL = true
 
 [tools]
 azure-cli = "latest"
+bun = "1.2.0"
 node = "latest"
 opentofu = "latest"
 terraform = "1"

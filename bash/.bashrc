@@ -5,6 +5,7 @@ HISTCONTROL=ignoreboth
 HISTSIZE=1000
 HISTFILESIZE=2000
 PATH="/usr/bin:$HOME/.local/bin:$PATH"
+XDG_CONFIG_HOME="$HOME/.config"
 
 # Default override
 alias ls='ls -h --color=auto'
@@ -31,7 +32,7 @@ alias fcat='cat $(fzf)'
 alias fed='nvim $(fzf)'
 alias cd2='cd ../..'
 alias compress="time tar -I 'zstd -8 -v' -cf"
-alias lg='lazygit'
+alias lg='lazygit --ucd ~/.config/jesseduffield/lazygit'
 alias k=kubectl
 alias ltree='find . | sed -e "s/[^-][^\/]*\//  |/g" -e "s/|\([^ ]\)/|-\1/"'
 complete -F __start_kubectl k

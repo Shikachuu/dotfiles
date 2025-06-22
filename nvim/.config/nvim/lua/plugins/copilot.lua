@@ -20,7 +20,7 @@ return {
       { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
     },
     opts = {
-      model = "claude-3.7-sonnet",
+      model = "gpt-4.1",
       prompts = {
         Commit = "Write commit message for the change with Conventional Commits convention. Keep the title under 50 characters and wrap message at 72 characters. Format as a gitcommit code block.",
         Review = "Please review the following code and provide suggestions for improvement.",

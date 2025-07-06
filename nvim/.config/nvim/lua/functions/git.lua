@@ -27,27 +27,6 @@ local function get_all_git_changes(callback)
   }):start()
 end
 
-local function generate_commit_message_with_claude(preprompt, changes, callback)
-  local prompt = preprompt .. "\n\nHere are the changes:\n\n" .. changes
-
-  Job:new({
-    command = "claude",
-    args = { "-p" },
-    writer = prompt,
-    on_exit = function(j, exit_code)
-      vim.schedule(function()
-        if exit_code == 0 then
-          local result = table.concat(j:result(), "\n")
-          callback(result)
-        else
-          vim.notify("Failed to generate commit message with Claude Code", vim.log.levels.ERROR, { title = "Git" })
-          callback(nil)
-        end
-      end)
-    end,
-  }):start()
-end
-
 local function notify_on_exit(success_msg, error_prefix)
   return function(_, exit_code)
     vim.schedule(function()
@@ -179,18 +158,38 @@ function M.commit_popup()
         return
       end
 
-      generate_commit_message_with_claude(default_preprompt, changes, function(generated_message)
-        if generated_message then
-          vim.schedule(function()
-            local lines = vim.split(generated_message, "\n")
-            api.nvim_buf_set_lines(buf, 0, -1, false, lines)
+      local prompt = default_preprompt .. "\n\nChanges:\n\n"
 
-            -- Position cursor at the end
-            api.nvim_win_set_cursor(win, { #lines, #lines[#lines] })
-            vim.cmd("startinsert!")
+      local job = Job:new({
+        command = "claude",
+        args = { "-p", prompt },
+        writer = changes,
+        on_exit = function(j, exit_code)
+          vim.schedule(function()
+            if exit_code ~= 0 then
+              vim.notify("Failed to generate commit message with Claude Code", vim.log.levels.ERROR, { title = "Git" })
+              return
+            end
+            local result = table.concat(j:result(), "\n")
+
+            -- Clean up the result and split into lines
+            local cleaned_result = result:gsub("^%s*", ""):gsub("%s*$", "")
+            local commit_lines = vim.split(cleaned_result, "\n", { plain = true })
+
+            -- Filter out any empty lines at the start
+            local filtered_lines = {}
+            for _, line in ipairs(commit_lines) do
+              if line:match("%S") then -- Only include lines with non-whitespace content
+                table.insert(filtered_lines, line)
+              end
+            end
+
+            local combined_output = vim.list_extend(filtered_lines, initial_content)
+            api.nvim_buf_set_lines(buf, 0, -1, false, combined_output)
           end)
-        end
-      end)
+        end,
+      })
+      job:start()
     end)
   end
 
@@ -215,13 +214,16 @@ function M.commit_popup()
     { noremap = true, silent = true, desc = "Generate with Claude Code" }
   )
 
+  api.nvim_buf_set_keymap(
+    buf,
+    "n",
+    "<C-g>",
+    [[<cmd>lua _G.__git_generate_claude()<CR>]],
+    { noremap = true, silent = true, desc = "Generate with Claude Code" }
+  )
+
   -- Position cursor at the top of the buffer
   api.nvim_win_set_cursor(win, { 1, 0 })
-
-  -- Auto-generate commit message when popup opens
-  vim.defer_fn(function()
-    generate_with_claude()
-  end, 100)
 end
 
 return M

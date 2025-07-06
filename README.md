@@ -25,7 +25,6 @@ stow -v -R -t $HOME <package>
 - `nvim`
 - `ghostty`
 - `mise`
-- `linux` (for Linux specific configurations)
 - `macos` (for macOS specific configurations)
 
 ## License

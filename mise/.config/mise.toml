@@ -8,4 +8,4 @@ node = "latest"
 opentofu = "latest"
 terraform = "1"
 tflint = "latest"
-
+claude = "latest"

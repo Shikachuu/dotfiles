@@ -3,6 +3,51 @@ local Job = require("plenary.job")
 
 local M = {}
 
+-- Default preprompt for Claude Code commit message generation
+local default_preprompt = [[
+  Generate a concise, conventional commit message for these changes.
+  The lines should be wrapped at 72 chars and use 50 chars for the title.
+  Use conventional commits format (feat:, fix:, docs:, etc.).
+  Be specific about what changed and why, but not too verbose.
+  This command's output is being piped, please ONLY output the commit message.
+]]
+
+local function get_all_git_changes(callback)
+  Job:new({
+    command = "git",
+    args = { "diff", "HEAD" },
+    on_exit = function(j, exit_code)
+      if exit_code == 0 then
+        local diff = table.concat(j:result(), "\n")
+        callback(diff)
+      else
+        callback("")
+      end
+    end,
+  }):start()
+end
+
+local function generate_commit_message_with_claude(preprompt, changes, callback)
+  local prompt = preprompt .. "\n\nHere are the changes:\n\n" .. changes
+
+  Job:new({
+    command = "claude",
+    args = { "-p" },
+    writer = prompt,
+    on_exit = function(j, exit_code)
+      vim.schedule(function()
+        if exit_code == 0 then
+          local result = table.concat(j:result(), "\n")
+          callback(result)
+        else
+          vim.notify("Failed to generate commit message with Claude Code", vim.log.levels.ERROR, { title = "Git" })
+          callback(nil)
+        end
+      end)
+    end,
+  }):start()
+end
+
 local function notify_on_exit(success_msg, error_prefix)
   return function(_, exit_code)
     vim.schedule(function()
@@ -40,7 +85,6 @@ function M.push()
 end
 
 function M.commit_popup()
-  local chat = require("CopilotChat")
   -- Create a commit message popup window
   local width = math.floor(vim.o.columns * 0.8)
   local height = math.floor(vim.o.lines * 0.6)
@@ -60,6 +104,8 @@ function M.commit_popup()
     "#",
     "# On branch: " .. vim.fn.system("git rev-parse --abbrev-ref HEAD"):gsub("\n", ""),
     "#",
+    "# Press <C-g> to generate commit message with Claude Code",
+    "#",
   }
 
   -- Add git status to the buffer
@@ -69,34 +115,6 @@ function M.commit_popup()
   end
 
   api.nvim_buf_set_lines(buf, 0, -1, false, initial_content)
-
-  chat.ask(
-    [[
-      Write commit message for the change with Conventional Commits convention.
-      Keep the title under 50 characters and wrap message at 72 characters.
-      Format as a gitcommit code block.
-      Only respond with the commit message.
-
-      > #git:staged
-      > #git:unstaged
-    ]],
-    {
-      model = "gpt-4o-mini",
-      headless = true,
-      callback = function(response)
-        if response then
-          local complete_commit = vim.split(response, "\n", { plain = true })
-          if #complete_commit > 2 then
-            complete_commit = vim.list_slice(complete_commit, 2, #complete_commit - 1)
-          end
-
-          local combined_output = vim.list_extend(complete_commit, initial_content)
-          api.nvim_buf_set_lines(buf, 0, -1, false, combined_output)
-        end
-        return response
-      end,
-    }
-  )
 
   -- Create window with rounded borders
   local win = api.nvim_open_win(buf, true, {
@@ -151,8 +169,36 @@ function M.commit_popup()
     end)
   end
 
-  -- Register the submit function
+  -- Function to generate commit message with Claude Code
+  local function generate_with_claude()
+    vim.notify("Generating commit message...", vim.log.levels.INFO, { title = "Git" })
+
+    get_all_git_changes(function(changes)
+      if changes == "" then
+        vim.notify("No changes found", vim.log.levels.WARN, { title = "Git" })
+        return
+      end
+
+      generate_commit_message_with_claude(default_preprompt, changes, function(generated_message)
+        if generated_message then
+          vim.schedule(function()
+            local lines = vim.split(generated_message, "\n")
+            api.nvim_buf_set_lines(buf, 0, -1, false, lines)
+
+            -- Position cursor at the end
+            api.nvim_win_set_cursor(win, { #lines, #lines[#lines] })
+            vim.cmd("startinsert!")
+          end)
+        end
+      end)
+    end)
+  end
+
+  -- Register the functions
   _G.__git_submit_commit = submit_commit
+  _G.__git_generate_claude = generate_with_claude
+
+  -- Set keybindings
   api.nvim_buf_set_keymap(
     buf,
     "n",
@@ -161,11 +207,21 @@ function M.commit_popup()
     { noremap = true, silent = true, desc = "Submit commit" }
   )
 
+  api.nvim_buf_set_keymap(
+    buf,
+    "i",
+    "<C-g>",
+    [[<cmd>lua _G.__git_generate_claude()<CR>]],
+    { noremap = true, silent = true, desc = "Generate with Claude Code" }
+  )
+
   -- Position cursor at the top of the buffer
   api.nvim_win_set_cursor(win, { 1, 0 })
 
-  -- Enter insert mode
-  vim.cmd("startinsert")
+  -- Auto-generate commit message when popup opens
+  vim.defer_fn(function()
+    generate_with_claude()
+  end, 100)
 end
 
 return M

@@ -54,7 +54,7 @@ return {
     }
 
     require("conform").formatters.tfmt = {
-      command = "terraform",
+      command = "tofu",
       args = { "fmt", "-" },
       stdin = true,
     }

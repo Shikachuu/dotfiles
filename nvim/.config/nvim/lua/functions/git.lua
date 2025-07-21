@@ -160,6 +160,7 @@ function M.commit_popup()
 
       local prompt = default_preprompt .. "\n\nChanges:\n\n"
 
+      ---@diagnostic disable-next-line: missing-fields
       local job = Job:new({
         command = "claude",
         args = { "-p", prompt },

@@ -14,6 +14,7 @@ return {
     opts = {
       ensure_installed = {
         "golangci-lint",
+        "tflint",
         "stylua",
         "prettier",
       },
@@ -60,6 +61,7 @@ return {
         automatic_installation = true,
         ensure_installed = {
           "biome",
+          "buf_ls",
           "gopls",
           "helm_ls",
           "jsonls",
@@ -67,8 +69,7 @@ return {
           "rust_analyzer",
           "sqls",
           "tailwindcss",
-          "terraformls",
-          "vacuum",
+          "tofu_ls",
           "vtsls",
           "yamlls",
         },

@@ -1,3 +1,6 @@
+[settings]
+idiomatic_version_file_enable_tools = ["node"]
+
 [env]
 MISE_EXPERIMENTAL = true
 

@@ -67,7 +67,6 @@ return {
           "jsonls",
           "lua_ls",
           "rust_analyzer",
-          "sqls",
           "tailwindcss",
           "tofu_ls",
           "vtsls",

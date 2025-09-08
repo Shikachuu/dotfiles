@@ -62,7 +62,7 @@ return {
           -- Enter key confirms completion item
           ["<CR>"] = cmp.mapping.confirm({ select = false }),
           -- Ctrl + space triggers completion menu
-          ["<C-Space>"] = cmp.mapping.complete(),
+          ["<C-c>"] = cmp.mapping.complete(),
         }),
       })
     end,

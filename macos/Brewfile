@@ -28,7 +28,7 @@ brew "jesseduffield/lazygit/lazygit"
 
 cask "bambu-studio"
 cask "datagrip"
-cask "eloston-chromium"
+cask "ungoogled-chromium"
 cask "firefox@beta"
 cask "font-jetbrains-mono-nerd-font"
 cask "ghostty"
@@ -43,6 +43,7 @@ mas "Bitwarden", id: 1352778147
 mas "Refined GitHub", id: 1519867270
 
 if File.exist?(File.expand_path("~/.work"))
+    brew "openfortivpn"
     brew "libpq", link: true
     mas "Slack", id: 803453959
 end

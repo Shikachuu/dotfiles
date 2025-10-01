@@ -1,14 +1,10 @@
 lastupdatecheck: 0
 recentrepos:
+    - /Users/mateczekus/Documents/work/esign-infra
+    - /Users/mateczekus/Documents/work/debug
     - /Users/mateczekus/Documents/oss/dotfiles
 startuppopupversion: 5
-lastversion: 0.53.0
+didshowhunkstaginghint: false
+lastversion: 0.55.1
 customcommandshistory: []
 hidecommandlog: false
-ignorewhitespaceindiffview: false
-diffcontextsize: 3
-renamesimilaritythreshold: 50
-localbranchsortorder: recency
-remotebranchsortorder: alphabetical
-gitlogorder: topo-order
-gitlogshowgraph: always

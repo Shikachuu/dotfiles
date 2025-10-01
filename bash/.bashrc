@@ -35,6 +35,7 @@ alias compress="time tar -I 'zstd -8 -v' -cf"
 alias lg='lazygit --ucd ~/.config/jesseduffield/lazygit'
 alias k=kubectl
 alias ltree='find . | sed -e "s/[^-][^\/]*\//  |/g" -e "s/|\([^ ]\)/|-\1/"'
+alias kcurr='kubectl config current-context'
 complete -F __start_kubectl k
 
 # Git commands
@@ -85,10 +86,10 @@ alias flatpak-import='xargs -n2 flatpak install -y'
 
 # Extends
 # Load bash completion scripts on macOS and Linux
+source <(mise completion --include-bash-completion-lib bash)
 [[ -r "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh" ]] && source "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
 [[ -r "/usr/share/bash-completion/bash_completion" ]] && source "/usr/share/bash-completion/bash_completion"
 eval "$(starship init bash)"
 eval "$(zoxide init bash)"
-source <(kubectl completion bash)
-eval "$(mise completion bash)"
 eval "$(mise activate bash)"
+source <(kubectl completion bash)

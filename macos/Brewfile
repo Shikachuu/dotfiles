@@ -34,9 +34,10 @@ cask "font-jetbrains-mono-nerd-font"
 cask "ghostty"
 cask "legcord"
 cask "libreoffice"
-cask "rectangle"
+cask "raspberry-pi-imager"
 cask "spotify"
 cask "zed"
+cask "yaak"
 
 mas "AdGuard for Safari", id: 1440147259
 mas "Bitwarden", id: 1352778147

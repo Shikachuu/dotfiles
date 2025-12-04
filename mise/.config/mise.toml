@@ -5,11 +5,8 @@ idiomatic_version_file_enable_tools = ["node"]
 MISE_EXPERIMENTAL = true
 
 [tools]
-azure-cli = "latest"
 bun = "1.2.18"
 node = "latest"
 opentofu = "latest"
-terraform = "1"
-tflint = "latest"
 claude = "latest"
 grpcurl = "latest"

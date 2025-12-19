@@ -1,0 +1,93 @@
+minimumLimaVersion: 2.0.0
+containerd:
+  system: false
+  user: false
+provision:
+  - mode: system
+    # This script defines the host.docker.internal hostname when hostResolver is disabled.
+    # It is also needed for lima 0.8.2 and earlier, which does not support hostResolver.hosts.
+    # Names defined in /etc/hosts inside the VM are not resolved inside containers when
+    # using the hostResolver; use hostResolver.hosts instead (requires lima 0.8.3 or later).
+    script: |
+      #!/bin/sh
+      sed -i 's/host.lima.internal.*/host.lima.internal host.docker.internal/' /etc/hosts
+  - mode: system
+    script: |
+      #!/bin/bash
+      set -eux -o pipefail
+      command -v docker >/dev/null 2>&1 && exit 0
+      export DEBIAN_FRONTEND=noninteractive
+      curl -fsSL https://get.docker.com | sh
+  - mode: yq
+    path: /etc/systemd/system/docker.socket.d/override.conf
+    format: ini
+    expression: .Socket.SocketUser="{{.User}}"
+  - mode: yq
+    path: "/etc/docker/daemon.json"
+    expression: |
+      .features.cdi = true |
+      .features.containerd-snapshotter = {{.Param.containerdSnapshotter}}
+probes:
+  - script: |
+      #!/bin/bash
+      set -eux -o pipefail
+      if ! timeout 30s bash -c "until command -v docker >/dev/null 2>&1; do sleep 3; done"; then
+        echo >&2 "docker is not installed yet"
+        exit 1
+      fi
+      if ! timeout 30s bash -c "until pgrep dockerd; do sleep 3; done"; then
+        echo >&2 "dockerd is not running"
+        exit 1
+      fi
+    hint: See "/var/log/cloud-init-output.log" in the guest
+hostResolver:
+  hosts:
+    host.docker.internal: host.lima.internal
+portForwards:
+  - guestSocket: "/var/run/docker.sock"
+    hostSocket: "{{.Dir}}/sock/docker.sock"
+message: |
+  To run `docker` on the host, run the following commands:
+  ------
+  docker context create lima-{{.Name}} --docker "host=unix://{{.Dir}}/sock/docker.sock"
+  docker context use lima-{{.Name}}
+  ------
+  Don't forget to export DOCKER_SOCK environment variable to external services that uses the docker socket! (eg. traefik, ko)
+  ------
+  export DOCKER_HOST=$(docker context inspect --format '\{\{.Endpoints.docker.Host\}\}' $(docker context show))
+  ------
+  {{- if .Instance.Config.VMOpts.vz.rosetta.enabled}}
+  You can use Rosetta AOT Caching with the CDI spec:
+  See: https://lima-vm.io/docs/config/multi-arch/#rosetta-aot-caching
+  {{- end}}
+param:
+  containerdSnapshotter: true
+
+images:
+  # Try to use release-yyyyMMdd image if available. Note that release-yyyyMMdd will be removed after several months.
+  - location: "https://cloud-images.ubuntu.com/releases/noble/release-20251031/ubuntu-24.04-server-cloudimg-amd64.img"
+    arch: "x86_64"
+    digest: "sha256:f0a5da9499adaaca6249792df25032430f33f0130eddf39433782b5362057b99"
+  - location: "https://cloud-images.ubuntu.com/releases/noble/release-20251031/ubuntu-24.04-server-cloudimg-arm64.img"
+    arch: "aarch64"
+    digest: "sha256:499fa6088985c641e38d69cfd98105a3e45dc082f07ad5779db49ccb958bc3a9"
+  - location: "https://cloud-images.ubuntu.com/releases/noble/release-20251031/ubuntu-24.04-server-cloudimg-riscv64.img"
+  # Fallback to the latest release image.
+  # Hint: run `limactl prune` to invalidate the cache
+
+  - location: https://cloud-images.ubuntu.com/releases/noble/release/ubuntu-24.04-server-cloudimg-amd64.img
+    arch: x86_64
+  - location: https://cloud-images.ubuntu.com/releases/noble/release/ubuntu-24.04-server-cloudimg-arm64.img
+    arch: aarch64
+
+mounts:
+  - location: "~"
+    writable: true
+
+mountType: reverse-sshfs
+vmType: vz
+vmOpts:
+  vz:
+    rosetta:
+      enabled: true
+      binfmt: true

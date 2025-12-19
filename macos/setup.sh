@@ -1,5 +1,11 @@
 #!/bin/bash
 
+set -euo pipefail
+
+echo "Resolving dotfile path..."
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+DOTFILES_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+
 defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
 defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
 defaults write -g NSAutomaticCapitalizationEnabled -bool false
@@ -35,10 +41,12 @@ defaults write com.apple.WindowManager EnableTiledWindowMargins -bool false
 defaults write com.apple.WindowManager EnableTilingByEdgeDrag -bool true
 defaults write com.apple.WindowManager EnableTilingOptionAccelerator -bool true
 
-brew_bash_path=$(ls "$(brew --prefix)/bin/bash")
+brew_bash_path="$(brew --prefix)/bin/bash"
 
 if ! grep -Fxq "$brew_bash_path" /etc/shells; then
   echo "$brew_bash_path" | sudo tee -a /etc/shells
-  chsh -s "$(brew --prefix)/bin/bash"
+  chsh -s "$brew_bash_path"
 fi
 
+limactl create --name=default "$DOTFILES_DIR/lima/docker.yaml" || true
+limactl create --name=k3s "$DOTFILES_DIR/lima/k3s.yaml" || true

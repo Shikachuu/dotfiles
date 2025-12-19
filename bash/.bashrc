@@ -71,6 +71,7 @@ function get_container_runtime() {
         alias cr='podman'
     elif [ -x "$(command -v docker)" ]; then
         alias cr='docker'
+        DOCKER_HOST=$(docker context inspect --format '{{.Endpoints.docker.Host}}' $(docker context show))
     else
         echo "No container runtime found"
     fi

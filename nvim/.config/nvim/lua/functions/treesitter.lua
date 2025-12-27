@@ -13,4 +13,12 @@ M.setup_gotmpl = function()
   })
 end
 
+M.setup_starlark = function()
+  vim.filetype.add({
+    pattern = {
+      ["Tiltfile"] = "starlark",
+    },
+  })
+end
+
 return M

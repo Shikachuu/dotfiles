@@ -17,6 +17,7 @@ return {
         "tflint",
         "stylua",
         "prettier",
+        "tilt",
         "sqruff",
       },
     },

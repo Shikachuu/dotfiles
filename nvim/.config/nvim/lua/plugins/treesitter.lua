@@ -31,6 +31,7 @@ return {
         "proto",
         "rust",
         "sql",
+        "starlark",
         "toml",
         "typescript",
         "vim",

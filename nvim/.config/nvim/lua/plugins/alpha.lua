@@ -26,7 +26,7 @@ return {
     dashboard.section.buttons.val = {
       dashboard.button("n", "new", "<cmd>ene <CR>"),
       dashboard.button("r", "recent", ":Telescope oldfiles<CR>"),
-      dashboard.button("s", "open last session", [[<cmd>lua require("persistence").load({ last = true })<CR>]]),
+      dashboard.button("s", "open last session", [[<cmd>lua require("persistence").load()<CR>]]),
       dashboard.button("q", "quit", ":qa<CR>"),
     }
     dashboard.section.footer.val = { meme() }

@@ -17,6 +17,7 @@ return {
         "tflint",
         "stylua",
         "prettier",
+        "taplo",
         "tilt",
         "sqruff",
       },
@@ -68,6 +69,7 @@ return {
           "helm_ls",
           "jsonls",
           "lua_ls",
+          "harper_ls",
           "rust_analyzer",
           "tailwindcss",
           "tofu_ls",
@@ -80,11 +82,11 @@ return {
   },
   {
     "folke/lazydev.nvim",
-    ft = "lua", -- only load on lua files
+    ft = "lua", -- only load on Lua files
     opts = {
       library = {
         -- See the configuration section for more details
-        -- Load luvit types when the `vim.uv` word is found
+        -- Load `luvit` types when the `vim.uv` word is found
         { path = "luvit-meta/library", words = { "vim%.uv" } },
       },
     },

@@ -1,0 +1,30 @@
+{
+    "$schema": "https://opencode.ai/config.json",
+    "theme": "cyberdream",
+    "model": "anthropic/claude-sonnet-4-5",
+    "small_model": "anthropic/claude-haiku-4-5",
+    "autoupdate": true,
+    "permission": {
+        "lsp": "allow",
+        "read": "allow",
+        "edit": "ask",
+        "glob": "allow",
+        "grep": "allow",
+        "codesearch": "allow",
+        "websearch": "allow",
+        "list": "allow",
+        "bash": {
+            "*": "ask",
+            "rm *": "deny",
+            "grep *": "allow",
+            "file *": "allow",
+            "find *": "allow",
+            "ls *": "allow"
+        },
+        "webfetch": "allow",
+        "todoread": "allow",
+        "todowrite": "allow",
+        "task": "allow",
+        "question": "allow",
+    }
+}

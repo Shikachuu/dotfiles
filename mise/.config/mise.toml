@@ -8,5 +8,3 @@ MISE_EXPERIMENTAL = true
 bun = "1.2.18"
 node = "latest"
 opentofu = "latest"
-claude = "latest"
-grpcurl = "latest"

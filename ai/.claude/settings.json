@@ -1,7 +1,4 @@
 {
-  "model": "sonnet",
-  "autoUpdatesChannel": "stable",
-
   "permissions": {
     "allow": [
       "mcp__ide__getDiagnostics",
@@ -13,21 +10,38 @@
       "TaskList",
       "TaskGet",
       "Task",
-      "AskUserQuestion"
+      "AskUserQuestion",
+      "Bash(ls **)",
+      "Bash(find **)",
+      "Bash(pwd)",
+      "Bash(echo **)",
+      "Bash(cat **)",
+      "Bash(head **)",
+      "Bash(tail **)",
+      "Bash(git status **)",
+      "Bash(git log **)",
+      "Bash(git diff **)",
+      "Bash(git show **)",
+      "Bash(git branch **)",
+      "Bash(which **)",
+      "Bash(whereis **)",
+      "Bash(file **)",
+      "Bash(stat **)",
+      "Bash(wc **)",
+      "Bash(tree **)"
     ],
-    "deny": [],
-    "ask": ["Edit", "Write", "Bash"],
+    "deny": [
+      "Bash(rm **)"
+    ],
+    "ask": [
+      "Edit",
+      "Write"
+    ],
     "defaultMode": "default"
   },
-
-  "env": {
-    "ANTHROPIC_DEFAULT_SONNET_MODEL": "claude-sonnet-4-5-20250929",
-    "ANTHROPIC_DEFAULT_HAIKU_MODEL": "claude-haiku-4-5-20251001",
-    "CLAUDE_CODE_SUBAGENT_MODEL": "claude-haiku-4-5-20251001"
-  },
-
   "statusLine": {
     "type": "command",
     "command": "~/.claude/statusline.sh"
-  }
+  },
+  "autoUpdatesChannel": "stable"
 }

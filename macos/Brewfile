@@ -4,6 +4,7 @@ tap "nikitabobko/tap"
 tap "anomalyco/tap"
 tap "tw93/tap"
 
+brew "awscli"
 brew "bash"
 brew "bash-completion"
 brew "docker"

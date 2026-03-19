@@ -20,6 +20,8 @@ return {
         "taplo",
         "tilt",
         "sqruff",
+        "oxlint",
+        "oxfmt",
       },
     },
   },

@@ -6,9 +6,13 @@ return {
 
     local function use_web_formatter()
       local biome_config_pattern = require("lspconfig.util").root_pattern("biome.json", "biome.jsonc")
+      local oxfmt_config_pattern = require("lspconfig.util").root_pattern(".oxfmtrc.json", ".oxfmtrc.jsonc")
       local has_biome_file = biome_config_pattern(vim.fn.getcwd()) ~= nil
+      local has_oxfmt_file = oxfmt_config_pattern(vim.fn.getcwd()) ~= nil
       if require("conform").get_formatter_info("biome") and has_biome_file then
         return { "biome" }
+      elseif require("conform").get_formatter_info("oxfmt") and has_oxfmt_file then
+        return { "oxfmt" }
       else
         return { "prettier" }
       end

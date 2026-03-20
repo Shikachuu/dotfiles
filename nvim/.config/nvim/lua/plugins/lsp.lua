@@ -19,6 +19,7 @@ return {
         "prettier",
         "taplo",
         "sqruff",
+        "ruff",
         "oxlint",
         "oxfmt",
       },

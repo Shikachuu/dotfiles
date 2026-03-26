@@ -23,6 +23,7 @@
       "Bash(git diff *)",
       "Bash(git show *)",
       "Bash(git branch *)",
+      "Bash(grep *)",
       "Bash(which *)",
       "Bash(whereis *)",
       "Bash(file *)",
@@ -35,6 +36,7 @@
     ],
     "defaultMode": "default"
   },
+  "model": "opusplan",
   "statusLine": {
     "type": "command",
     "command": "~/.claude/statusline.sh"

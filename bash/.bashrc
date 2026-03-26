@@ -42,6 +42,7 @@ complete -F __start_kubectl k
 alias gtoday='git log --since=midnight --branches --no-merges --pretty=format:"%t%C(green)%d %C(magenta)%an %C(default)%cr: %C(bold)%s"'
 alias gbcleanmr="git branch --merged origin/master | xargs git branch -d"
 alias gbcleanmn="git branch --merged origin/main | xargs git branch -d"
+alias ghpr="tv gh-prs"
 
 # Functions
 # Copies the 1st argument to the clipboard using wl-copy or pbcopy
@@ -93,4 +94,5 @@ source <(mise completion --include-bash-completion-lib bash)
 eval "$(starship init bash)"
 eval "$(zoxide init bash)"
 eval "$(mise activate bash)"
+eval "$(tv init bash)"
 source <(kubectl completion bash)

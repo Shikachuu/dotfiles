@@ -71,7 +71,6 @@ return {
           "helm_ls",
           "jsonls",
           "lua_ls",
-          "harper_ls",
           "rust_analyzer",
           "tailwindcss",
           "tofu_ls",

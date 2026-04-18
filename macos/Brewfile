@@ -36,7 +36,6 @@ brew "jesseduffield/lazygit/lazygit"
 
 cask "bambu-studio"
 cask "claude-code"
-cask "datagrip"
 cask "ungoogled-chromium"
 cask "font-jetbrains-mono-nerd-font"
 cask "ghostty"
@@ -44,7 +43,6 @@ cask "legcord"
 cask "libreoffice"
 cask "spotify"
 cask "zed"
-cask "yaak"
 
 mas "AdGuard for Safari", id: 1440147259
 mas "Bitwarden", id: 1352778147
@@ -59,6 +57,5 @@ end
 if File.exist?(File.expand_path("~/.personal"))
     tap "LizardByte/homebrew"
     brew "sunshine"
-    mas "Photomator", id: 1444636541
 end
 

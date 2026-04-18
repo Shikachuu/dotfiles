@@ -30,15 +30,7 @@ end tell
             env_line
           )
 
-          local path = os.tmpname() .. ".scpt"
-          local f = io.open(path, "w")
-          if not f then
-            return nil
-          end
-          f:write(script)
-          f:close()
-
-          return { "bash", "-c", "osascript " .. path .. " && sleep infinity" }
+          return { "bash", "-c", "osascript <<'APPLESCRIPT'\n" .. script .. "APPLESCRIPT\nsleep infinity" }
         end or "ghostty +new-window -e %s",
       },
     },

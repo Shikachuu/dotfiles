@@ -23,7 +23,7 @@ cursor-style-blink = true
 cursor-click-to-move = true
 
 background-opacity = 0.85
-background-blur = macos-glass-clear
+background-blur = macos-glass-regular
 
 # Set the window decoration to be as close as possible both in mac and linux
 window-decoration = auto

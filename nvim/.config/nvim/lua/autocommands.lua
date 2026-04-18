@@ -68,7 +68,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
   callback = function()
     if next(vim.lsp.get_clients()) == nil then
       vim.opt.foldmethod = "expr"
-      vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+      vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
     end
   end,
 })

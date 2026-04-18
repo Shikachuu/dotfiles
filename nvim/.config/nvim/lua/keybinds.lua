@@ -61,6 +61,12 @@ vim.keymap.set("n", "<leader>sph", ":split<CR>", { noremap = true, desc = "[s][p
 
 vim.keymap.set("n", "<C-Q>", ":bd<CR>", { noremap = true, desc = "[q]uit current tab", silent = true })
 
+local ts_select = require("functions.treesitter")
+vim.keymap.set("n", "<CR>", ts_select.init_selection, { desc = "Init treesitter selection" })
+vim.keymap.set("x", "<CR>", ts_select.node_incremental, { desc = "Expand treesitter selection" })
+vim.keymap.set("x", "<TAB>", ts_select.scope_incremental, { desc = "Expand treesitter selection to scope" })
+vim.keymap.set("x", "<S-TAB>", ts_select.node_decremental, { desc = "Shrink treesitter selection" })
+
 vim.keymap.set("n", "<leader>!", "za", { noremap = true, desc = "toggle fold under cursor", silent = true })
 vim.keymap.set("n", "<leader>.", "zA", { noremap = true, desc = "toggle all fold in file", silent = true })
 

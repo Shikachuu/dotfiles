@@ -36,10 +36,11 @@
     ],
     "defaultMode": "default"
   },
-  "model": "opusplan",
+  "model": "opus[1m]",
   "statusLine": {
     "type": "command",
     "command": "~/.claude/statusline.sh"
   },
-  "autoUpdatesChannel": "stable"
+  "autoUpdatesChannel": "stable",
+  "skipAutoPermissionPrompt": true
 }

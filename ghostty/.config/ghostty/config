@@ -18,15 +18,15 @@ font-size = 13
 clipboard-read = allow
 clipboard-write = allow
 
-cursor-style = block
+cursor-style = block_hollow
 cursor-style-blink = true
 cursor-click-to-move = true
 
 background-opacity = 0.85
-background-blur-radius = 30
+background-blur = macos-glass-clear
 
 # Set the window decoration to be as close as possible both in mac and linux
-window-decoration = true
+window-decoration = auto
 macos-titlebar-style = tabs
 adw-toolbar-style = raised-border
 
@@ -34,9 +34,9 @@ adw-toolbar-style = raised-border
 # `unconsumed` = the keybinding is not consumed it will be passed to the shell too
 # directions = up, down, left, right or for navigation top, bottom, left, right
 # https://ghostty.org/docs/config/keybind/reference
-keybind = unconsumed:ctrl+shift+s=new_split:right
-keybind = unconsumed:ctrl+shift+d=new_split:up
-keybind = unconsumed:ctrl+up=goto_split:top
-keybind = unconsumed:ctrl+down=goto_split:bottom
-keybind = unconsumed:ctrl+left=goto_split:left
-keybind = unconsumed:ctrl+right=goto_split:right
+keybind = ctrl+shift+s=new_split:right
+keybind = ctrl+shift+d=new_split:up
+keybind = ctrl+tab>up=goto_split:top
+keybind = ctrl+tab>down=goto_split:bottom
+keybind = ctrl+tab>left=goto_split:left
+keybind = ctrl+tab>right=goto_split:right

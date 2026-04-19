@@ -25,7 +25,6 @@ brew "mise"
 brew "mole"
 brew "neovim"
 brew "node"
-brew "opencode"
 brew "ripgrep"
 brew "starship"
 brew "stow"
@@ -43,14 +42,12 @@ cask "ghostty"
 cask "legcord"
 cask "libreoffice"
 cask "spotify"
-cask "zed"
 
 mas "AdGuard for Safari", id: 1440147259
 mas "Bitwarden", id: 1352778147
 mas "Refined GitHub", id: 1519867270
 
 if File.exist?(File.expand_path("~/.work"))
-    brew "openfortivpn"
     brew "libpq", link: true
     mas "Slack", id: 803453959
 end

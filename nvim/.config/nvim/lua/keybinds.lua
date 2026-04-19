@@ -72,6 +72,13 @@ vim.keymap.set("n", "<leader>.", "zA", { noremap = true, desc = "toggle all fold
 
 vim.keymap.set(
   "n",
+  "<leader>tmp",
+  ":Markview toggle<CR>",
+  { noremap = true, desc = "[t]oggle [m]arkdown [p]review", silent = true }
+)
+
+vim.keymap.set(
+  "n",
   "<leader>pcrd",
   yamlls_crd.open_picker,
   { noremap = true, desc = "[p]ick yaml [crd]", silent = true }

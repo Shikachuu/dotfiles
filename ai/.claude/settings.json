@@ -41,6 +41,17 @@
     "type": "command",
     "command": "~/.claude/statusline.sh"
   },
+  "extraKnownMarketplaces": {
+    "company-skills": {
+      "source": {
+        "source": "github",
+        "repo": "adroit-group/claude-tools"
+      }
+    }
+  },
   "autoUpdatesChannel": "stable",
-  "skipAutoPermissionPrompt": true
+  "skipAutoPermissionPrompt": true,
+  "enabledPlugins": {
+    "research@company-skills": true
+  }
 }

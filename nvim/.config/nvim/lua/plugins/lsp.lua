@@ -13,6 +13,7 @@ return {
     build = ":MasonUpdate",
     opts = {
       ensure_installed = {
+        "checkstyle",
         "golangci-lint",
         "tflint",
         "stylua",
@@ -69,6 +70,7 @@ return {
           "buf_ls",
           "gopls",
           "helm_ls",
+          "jdtls",
           "jsonls",
           "lua_ls",
           "rust_analyzer",

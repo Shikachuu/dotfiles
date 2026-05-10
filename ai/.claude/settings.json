@@ -41,6 +41,9 @@
     "type": "command",
     "command": "~/.claude/statusline.sh"
   },
+  "enabledPlugins": {
+    "research@company-skills": true
+  },
   "extraKnownMarketplaces": {
     "company-skills": {
       "source": {
@@ -49,9 +52,8 @@
       }
     }
   },
+  "effortLevel": "xhigh",
   "autoUpdatesChannel": "stable",
-  "skipAutoPermissionPrompt": true,
-  "enabledPlugins": {
-    "research@company-skills": true
-  }
+  "preferredNotifChannel": "ghostty",
+  "skipAutoPermissionPrompt": true
 }

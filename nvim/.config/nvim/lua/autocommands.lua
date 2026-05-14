@@ -33,9 +33,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 vim.api.nvim_create_autocmd({ "BufLeave", "BufUnload", "FocusLost", "WinLeave" }, {
   callback = function(event)
     local print_callback = function()
-      local buffer_name = vim.api.nvim_buf_get_name(0)
+      local buffer_name = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":~:.")
       vim.fn.timer_start(1300, function()
-        print("Saved " .. buffer_name .. " at " .. vim.fn.strftime("%H:%M:%S"))
+        vim.api.nvim_echo({ { "Saved " .. buffer_name .. " at " .. vim.fn.strftime("%H:%M:%S") } }, false, {})
       end)
     end
 

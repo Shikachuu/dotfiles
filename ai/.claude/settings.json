@@ -42,6 +42,8 @@
     "command": "~/.claude/statusline.sh"
   },
   "enabledPlugins": {
+    "codebase-discovery@company-skills": true,
+    "skill-authoring@company-skills": true,
     "research@company-skills": true
   },
   "extraKnownMarketplaces": {

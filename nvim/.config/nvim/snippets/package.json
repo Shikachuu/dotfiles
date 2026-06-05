@@ -28,8 +28,8 @@
         "path": "./markdown.json"
       },
       {
-          "language": "all",
-          "path": "./presentation.json"
+        "language": "all",
+        "path": "./presentation.json"
       },
       {
         "language": [

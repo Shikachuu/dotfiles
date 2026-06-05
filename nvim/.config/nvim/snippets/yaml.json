@@ -1,0 +1,7 @@
+{
+  "schema": {
+    "prefix": "schema",
+    "body": "# yaml-language-server: \$schema=${0}",
+    "description": "JsonSchema comment block for the YAML language server"
+  }
+}

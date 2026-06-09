@@ -4,7 +4,7 @@
     "body": [
       "# Implementation details",
       "",
-      "Let's create a single file CLI tool for browsing cloud cost in FOCUS schema exports.",
+      "Let's create a single file CLI tool in @main.py for browsing cloud cost in FOCUS schema exports.",
       "",
       "- the root command accepts the following flags:",
       "  - `-s` or `--search` that accepts two arguments a field name and a field value, for example: `fcb -s ServiceCategory Networking`",
@@ -43,7 +43,7 @@
       "- create a new json schema `fcb.schema.json` that defines the schema of our configuration, with examples and descriptions",
       "- add `jsonschema` as dependency and import the json schema as json so our bundler bundles it into the release file",
       "- validate the json schema to our @fcb.schema.json using jsconschema after reading it in",
-      "- ignore `\$schema` tags in case of json files, they are only there for better IDE support"
+      "- ignore `$schema` tags in case of json files, they are only there for better IDE support"
     ],
     "description": "demo json schema section"
   },

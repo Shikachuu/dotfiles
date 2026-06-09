@@ -28,6 +28,10 @@
         "path": "./markdown.json"
       },
       {
+        "language": "yaml",
+        "path": "./yaml.json"
+      },
+      {
         "language": "all",
         "path": "./presentation.json"
       },
@@ -39,12 +43,6 @@
           "javascriptreact"
         ],
         "path": "./js-ts-react.json"
-      },
-      {
-        "language": [
-          "yaml"
-        ],
-        "path": "./yaml.json"
       },
       {
         "language": "dockerfile",

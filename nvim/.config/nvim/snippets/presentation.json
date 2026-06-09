@@ -144,9 +144,9 @@
       "        \"hooks\": [",
       "          {",
       "            \"type\": \"command\",",
-      "            \"command\": \"test \\\"\\$(cat | jq -r \\\".stop_hook_active // false\\\")\\\" = true && exit 0; mise run lint >&2 || exit 2\",",
+      "            \"command\": \"test \\\"\\$(cat | jq -r \\\".stop_hook_active // false\\\")\\\" = true && exit 0; mise lint && mise test >&2 || exit 2\",",
       "            \"timeout\": 60,",
-      "            \"statusMessage\": \"Running mise run lint...\"",
+      "            \"statusMessage\": \"Running lint & typecheck & tests...\"",
       "          }",
       "        ]",
       "      }",
@@ -167,9 +167,12 @@
       "dir = \"{{ config_root }}\"",
       "run = [\"uv run ruff format\", \"uv run ty check\", \"uv run ruff check --fix\"]",
       "",
+      "[tasks.test]",
+      "dir = \"{{ config_root }}\"",
+      "run = \"uv run pytest\"",
+      "",
       "[settings]",
-      "experimental = true",
-      "lockfile = true"
+      "quiet = true"
     ],
     "description": "demo mise config",
     "scope": "toml"

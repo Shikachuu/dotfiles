@@ -36,7 +36,7 @@ brew "zoxide"
 brew "jesseduffield/lazygit/lazygit"
 
 cask "bambu-studio"
-cask "claude-code"
+cask "claude-code@latest"
 cask "ungoogled-chromium"
 cask "font-jetbrains-mono-nerd-font"
 cask "ghostty"

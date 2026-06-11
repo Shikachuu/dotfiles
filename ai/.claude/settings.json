@@ -55,7 +55,11 @@
     }
   },
   "effortLevel": "xhigh",
-  "autoUpdatesChannel": "stable",
+  "promptSuggestionEnabled": false,
+  "theme": "dark",
+  "editorMode": "normal",
   "preferredNotifChannel": "ghostty",
+  "switchModelsOnFlag": true,
+  "inputNeededNotifEnabled": true,
   "skipAutoPermissionPrompt": true
 }

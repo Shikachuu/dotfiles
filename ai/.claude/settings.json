@@ -44,7 +44,8 @@
   "enabledPlugins": {
     "codebase-discovery@company-skills": true,
     "skill-authoring@company-skills": true,
-    "research@company-skills": true
+    "research@company-skills": true,
+    "swift-lsp@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "company-skills": {
@@ -56,6 +57,8 @@
   },
   "effortLevel": "xhigh",
   "promptSuggestionEnabled": false,
+  "tui": "fullscreen",
+  "skipWorkflowUsageWarning": true,
   "theme": "dark",
   "editorMode": "normal",
   "preferredNotifChannel": "ghostty",

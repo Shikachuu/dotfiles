@@ -1,0 +1,28 @@
+{
+  "should_trigger": [
+    "set up CI for this repo",
+    "add a deploy workflow for staging",
+    "pin all the actions in .github/workflows to SHAs",
+    "this workflow file is huge, split it up",
+    "review my github actions",
+    "the release-please pipeline is broken",
+    "extract our node setup into a composite action",
+    "only run the backend tests when backend files change",
+    "add concurrency cancellation to the PR checks",
+    "wire up caching for golangci-lint in CI",
+    "bump actions/checkout to the latest version",
+    "give this workflow a dynamic run name"
+  ],
+  "should_not_trigger": [
+    "rename this git branch",
+    "write a Dockerfile for the api service",
+    "fix the failing unit test in auth.spec.ts",
+    "set up a cron job on my linux server",
+    "configure eslint for this project",
+    "deploy this manually to prod right now",
+    "explain what a git rebase does",
+    "add a new route to the express app",
+    "set up a kubernetes deployment manifest",
+    "create a jenkins pipeline"
+  ]
+}

@@ -1,4 +1,5 @@
 {
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "permissions": {
     "allow": [
       "mcp__ide__getDiagnostics",
@@ -9,8 +10,6 @@
       "WebSearch",
       "TaskList",
       "TaskGet",
-      "Task",
-      "AskUserQuestion",
       "Bash(ls *)",
       "Bash(find *)",
       "Bash(pwd)",
@@ -31,10 +30,12 @@
       "Bash(wc *)",
       "Bash(tree *)"
     ],
-    "deny": [
-      "Bash(rm *)"
-    ],
+    "deny": ["Bash(rm *)"],
     "defaultMode": "default"
+  },
+  "sandbox": {
+    "enabled": true,
+    "failIfUnavailable": true
   },
   "model": "opus[1m]",
   "statusLine": {

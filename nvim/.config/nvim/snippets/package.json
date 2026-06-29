@@ -32,10 +32,6 @@
         "path": "./yaml.json"
       },
       {
-        "language": "all",
-        "path": "./presentation.json"
-      },
-      {
         "language": [
           "typescript",
           "typescriptreact",

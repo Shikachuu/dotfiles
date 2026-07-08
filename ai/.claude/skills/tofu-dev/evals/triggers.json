@@ -1,0 +1,28 @@
+{
+  "should_trigger": [
+    "write a tofu module for an S3 bucket",
+    "add an RDS instance to our opentofu setup",
+    "set up opentofu for a new AWS project",
+    "structure my tofu project with environments and modules",
+    "add remote S3 state with locking to this tofu config",
+    "write a mock test for this tofu module",
+    "validate my tofu before I open a PR",
+    "is there a terraform-aws-modules module for a VPC?",
+    "migrate this terraform to opentofu",
+    "review this tofu module for our conventions",
+    "add an IAM task role in tofu for the ECS service",
+    "how should I pin the aws provider version in tofu"
+  ],
+  "should_not_trigger": [
+    "write a CloudFormation template for an S3 bucket",
+    "deploy this with AWS CDK",
+    "create an S3 bucket with the aws CLI",
+    "write a Pulumi program for our VPC",
+    "apply this kubernetes manifest to the cluster",
+    "configure the aws cli profile on my laptop",
+    "write a bash deploy script",
+    "set up a GitHub Actions workflow for CI",
+    "explain what an S3 bucket is",
+    "debug my Dockerfile build"
+  ]
+}

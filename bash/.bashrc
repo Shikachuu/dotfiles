@@ -36,6 +36,7 @@ alias lg='lazygit --ucd ~/.config/jesseduffield/lazygit'
 alias k=kubectl
 alias ltree='find . | sed -e "s/[^-][^\/]*\//  |/g" -e "s/|\([^ ]\)/|-\1/"'
 alias kcurr='kubectl config current-context'
+alias cc='claude'
 complete -F __start_kubectl k
 
 # Git commands

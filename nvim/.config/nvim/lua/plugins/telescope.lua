@@ -16,6 +16,7 @@ return {
           file_browser = {
             follow_symlinks = true,
             hidden = true,
+            use_ui_input = false,
           },
         },
         defaults = {

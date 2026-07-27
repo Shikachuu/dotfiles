@@ -43,6 +43,7 @@ cask "ghostty"
 cask "legcord"
 cask "libreoffice"
 cask "spotify"
+cask "tablepro"
 
 mas "AdGuard Mini", id: 1440147259
 mas "Bitwarden", id: 1352778147

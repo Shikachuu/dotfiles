@@ -57,6 +57,28 @@ M.setup_helm_ls = function()
   }
 end
 
+---Registers sourcekit-lsp, which mason cannot install.
+---nvim-lspconfig ships lsp/sourcekit.lua, so this only overrides the filetypes
+---and root resolution. Attaches only when the binary exists and the project is a
+---Swift package, leaving machines without a toolchain unaffected.
+M.setup_sourcekit = function()
+  vim.lsp.config("sourcekit", {
+    filetypes = { "swift" },
+    root_dir = function(bufnr, on_dir)
+      if vim.fn.executable("sourcekit-lsp") == 0 then
+        return
+      end
+
+      local root = vim.fs.root(bufnr, { "Package.swift", ".sourcekit-lsp" })
+      if root then
+        on_dir(root)
+      end
+    end,
+  })
+
+  vim.lsp.enable("sourcekit")
+end
+
 ---This function ensures that the specified linters are installed using Mason
 ---@param linters table List of linters to ensure are installed
 M.mason_ensure_installed = function(linters)

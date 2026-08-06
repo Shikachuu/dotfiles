@@ -30,6 +30,7 @@ return {
         "rust",
         "sql",
         "starlark",
+        "swift",
         "toml",
         "typescript",
         "vim",

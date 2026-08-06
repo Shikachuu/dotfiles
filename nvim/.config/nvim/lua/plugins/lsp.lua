@@ -30,41 +30,19 @@ return {
     "williamboman/mason-lspconfig.nvim",
     event = { "BufReadPre", "BufNewFile" },
     config = function()
-      local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
-      lsp_capabilities.textDocument.foldingRandge = { dynamicRegistration = true }
-      local settings = {}
-      local default_setup = function(server)
-        local schemastore = require("schemastore")
-        local lspconfig = require("lspconfig")
+      local schemastore = require("schemastore")
 
-        if server == "gopls" then
-          settings = lsp_funcs.setup_gopls(settings)
-        elseif server == "jsonls" then
-          settings = lsp_funcs.setup_jsonls(settings, schemastore)
-        elseif server == "yamlls" then
-          settings = lsp_funcs.setup_yamlls(settings, schemastore)
-        elseif server == "helm_ls" then
-          settings = lsp_funcs.setup_helm_ls()
-        end
+      local capabilities = require("cmp_nvim_lsp").default_capabilities()
+      capabilities.textDocument.foldingRange = { dynamicRegistration = false, lineFoldingOnly = true }
 
-        lspconfig[server].setup({
-          capabilities = lsp_capabilities,
-          settings = settings,
-
-          handlers = {
-            ["textDocument/foldingRange"] = function(_, _, result)
-              if not result then
-                return
-              end
-              vim.lsp.util.set_fold(result)
-            end,
-          },
-        })
-      end
+      vim.lsp.config("*", { capabilities = capabilities })
+      vim.lsp.config("gopls", { settings = lsp_funcs.setup_gopls({}) })
+      vim.lsp.config("jsonls", { settings = lsp_funcs.setup_jsonls({}, schemastore) })
+      vim.lsp.config("yamlls", { settings = lsp_funcs.setup_yamlls({}, schemastore) })
+      vim.lsp.config("helm_ls", { settings = lsp_funcs.setup_helm_ls() })
 
       require("mason-lspconfig").setup({
         automatic_enable = true,
-        automatic_installation = true,
         ensure_installed = {
           "biome",
           "buf_ls",
@@ -81,8 +59,9 @@ return {
           "vtsls",
           "yamlls",
         },
-        handlers = { default_setup },
       })
+
+      lsp_funcs.setup_sourcekit()
     end,
   },
   {

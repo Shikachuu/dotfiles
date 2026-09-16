@@ -1,0 +1,28 @@
+{
+  "should_trigger": [
+    "unslop this README",
+    "this paragraph reads like ChatGPT, fix it",
+    "remove the AI tells from my PR description",
+    "clean up the writing in docs/architecture.md",
+    "make this release note sound human",
+    "do a style pass on this draft",
+    "cut the em dashes out of this file",
+    "tighten this blog post",
+    "why does this doc sound so generated",
+    "rewrite this so it doesn't sound like an LLM wrote it",
+    "de-slop the changelog",
+    "review the prose in this markdown"
+  ],
+  "should_not_trigger": [
+    "refactor this function",
+    "translate this to Spanish",
+    "write a new README from scratch",
+    "fix the failing test",
+    "rename this variable",
+    "summarize this file",
+    "add a CI workflow",
+    "what does this code do",
+    "write a tofu module",
+    "debug this stack trace"
+  ]
+}

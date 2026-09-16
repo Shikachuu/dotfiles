@@ -30,10 +30,8 @@
       "Bash(wc *)",
       "Bash(tree *)"
     ],
-    "deny": [
-      "Bash(rm *)"
-    ],
-    "defaultMode": "default"
+    "deny": ["Bash(rm *)"],
+    "defaultMode": "auto"
   },
   "model": "opus[1m]",
   "statusLine": {
@@ -53,10 +51,6 @@
         "repo": "adroit-group/claude-tools"
       }
     }
-  },
-  "sandbox": {
-    "enabled": true,
-    "failIfUnavailable": true
   },
   "effortLevel": "xhigh",
   "promptSuggestionEnabled": false,

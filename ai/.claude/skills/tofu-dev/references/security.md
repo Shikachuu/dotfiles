@@ -16,7 +16,7 @@ Never suppress a finding inline - add it to `.trivyignore.yaml` keyed by AVD id 
   - CI env injection.
 - The `aws_secretsmanager_secret_version` **data source persists `secret_string` to state** -
   avoid reading secrets back through it.
-- Store service config as one Secrets Manager secret per env (see conventions.md § Secrets);
+- Store service config as one Secrets Manager secret per env (see the Secrets section of conventions.md);
   guard rotated values with `lifecycle { ignore_changes = [secret_string] }`.
 
 ## Security groups

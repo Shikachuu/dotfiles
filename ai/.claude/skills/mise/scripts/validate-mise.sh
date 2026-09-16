@@ -93,6 +93,15 @@ while IFS= read -r t; do
     [ -n "$d" ] || log_warn "task '$t' has no description"
 done < <(mise tasks ls --no-header 2>/dev/null | awk '{print $1}')
 
+# mise omits a non-executable file task from `mise tasks ls` entirely; only
+# `mise run <name>` explains why. Catch it here instead.
+for d in mise-tasks .mise-tasks mise/tasks .mise/tasks .config/mise/tasks; do
+    [ -d "$d" ] || continue
+    while IFS= read -r -d '' f; do
+        [ -x "$f" ] || fail "$f is not executable, so mise will not discover it (chmod +x)"
+    done < <(find "$d" -type f ! -name '.*' -print0 2>/dev/null)
+done
+
 section "Lockfile"
 lock_setting=$(mise settings get lockfile 2>/dev/null || echo "unset")
 if [ "$lock_setting" = "true" ]; then

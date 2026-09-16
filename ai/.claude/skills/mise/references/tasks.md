@@ -69,9 +69,9 @@ Parsed values arrive as `usage_*` environment variables.
 Search directories: `mise-tasks/`, `.mise-tasks/`, `mise/tasks/`, `.mise/tasks/`,
 `.config/mise/tasks/`. Extend with `task_config.includes`.
 
-**Every file task must be executable.** mise silently does not discover a script without the
-executable bit, and the symptom looks like the task never existing. `chmod +x` is part of creating
-one.
+**Every file task must be executable.** Without the executable bit the script is absent from
+`mise tasks ls` entirely. `mise run <name>` is the one place mise explains why:
+`no task <name> found, but a non-executable file exists at ...`. `chmod +x` is part of creating one.
 
 Subdirectories become colon-namespaced names, and `_default` is the directory's default:
 

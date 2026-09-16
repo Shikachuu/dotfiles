@@ -106,8 +106,8 @@ run = "cargo build --release"
 Past roughly five lines or any real control flow, move it to `mise-tasks/<name>` as a script. A long
 `run` array in TOML loses shellcheck, editor support, and readable diffs.
 
-**A file task must be executable.** mise silently does not discover a `mise-tasks/` script without
-the executable bit, and that failure looks like the task never existing.
+**A file task must be executable.** Without the executable bit the script never appears in
+`mise tasks ls`. `mise run <name>` does name the cause, so check there when a task seems to vanish.
 
 `depends` gives no ordering guarantee, so anything order-dependent needs an explicit chain or
 `wait_for`. Task arguments use the `usage` field or a `#USAGE` header, never the Tera helpers.
@@ -168,7 +168,8 @@ mise still accepts most of these and only warns, so they look correct until they
 - `scripts/mise-tool-lookup.sh <name> [<name>...]` - backend, real latest version, and the exact
   `[tools]` line. Falls back to fuzzy search on a miss instead of dead-ending.
 - `scripts/validate-mise.sh [dir]` - the gate: deprecated forms, what loads, resolved versions,
-  task validity and descriptions, lockfile presence, gitignore correctness, trust and doctor.
+  task validity and descriptions, non-executable file tasks, lockfile presence, gitignore
+  correctness, trust and doctor.
 
 Both need `mise` and `jq` and fail fast without them.
 

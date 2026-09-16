@@ -1,0 +1,28 @@
+{
+  "should_trigger": [
+    "set up mise for this repo",
+    "pin node 22 and python 3.12 with mise",
+    "add opentofu to mise.toml",
+    "what's the mise registry name for ripgrep",
+    "add a lint task to mise.toml",
+    "write a mise task that takes a --clean flag",
+    "load the .env file through mise instead of exporting it in my shell",
+    "move this bash script into mise-tasks",
+    "turn on the mise lockfile and commit it",
+    "mise run build picks the wrong node version, which config wins",
+    "mise install is failing on this repo",
+    "migrate this repo from asdf .tool-versions to mise"
+  ],
+  "should_not_trigger": [
+    "install ripgrep with homebrew",
+    "add a node 22 base image to the Dockerfile",
+    "set up a GitHub Actions workflow to run the tests",
+    "npm install express and save it to package.json",
+    "add the serde crate with cargo add",
+    "install node 22 with nvm",
+    "set up pyenv and pin python 3.12",
+    "add a build target to the Makefile",
+    "write a tofu module for an S3 bucket",
+    "unslop this README"
+  ]
+}

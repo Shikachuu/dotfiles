@@ -1,0 +1,8 @@
+[settings]
+experimental = true
+idiomatic_version_file_enable_tools = ["node", "python"]
+
+[tools]
+bun = "1.2.18"
+node = "latest"
+opentofu = "latest"

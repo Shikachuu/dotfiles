@@ -2,14 +2,15 @@
 
 ## mise.lock
 
-```toml
-[settings]
-lockfile = true
-```
+Create it with `mise lock` and commit it. Do not set `[settings] lockfile = true` in a repo config.
 
-With the setting unset, mise updates an existing lockfile but never creates one. The lockfile name
-mirrors the config: `mise.toml` gives `mise.lock`, `mise.test.toml` gives `mise.test.lock`.
-Dependency sidecars live in `.mise/locks/`.
+Measured on 2026.8.12: with no `lockfile` setting anywhere, `mise lock` still creates `mise.lock`,
+and a later `mise install` adds newly declared tools to it automatically. The setting only makes
+mise create a lockfile that does not exist yet. Since a repo commits its lockfile, every clone
+already has one, so the setting buys nothing and costs the config its trust-free status.
+
+The lockfile name mirrors the config: `mise.toml` gives `mise.lock`, `mise.test.toml` gives
+`mise.test.lock`. Dependency sidecars live in `.mise/locks/`.
 
 ```toml
 lockfile_version = 2
@@ -61,8 +62,8 @@ Verified on mise 2026.8.12 by running each variant:
 | `[settings]` | **yes** |
 | `[env]` | **yes** |
 
-So a config that turns on the lockfile or sets an env var prompts on first use. That is expected,
-not a misconfiguration. Plan for it rather than trying to design around it.
+So a config that sets an env var or any setting prompts on first use. Keeping `[settings]` out of
+repo configs, as the lockfile section above argues, means only `[env]` costs you a prompt.
 
 ```sh
 mise trust                  # trust the config here or in a parent
@@ -86,12 +87,9 @@ mise trust --ignore         # never trust, ignore going forward
 - Never run `mise trust -a`. It trusts the current directory, its parents and its subdirectories in
   one go.
 
-Two practical choices:
-
-1. Put `lockfile = true` in your global config so your own repos get lockfiles without every repo
-   config carrying a `[settings]` block.
-2. Put it in the repo config when the team must have it, and note the one-time `mise trust` in the
-   README.
+For a repo that needs `[env]`, note the one-time `mise trust` in the README, and add the repo's
+parent directory to `settings.trusted_config_paths` in your own global config so your clones stop
+asking.
 
 Verification is built in for aqua, node and swift: checksums plus Cosign, Minisign or OpenPGP
 signatures and SLSA provenance. `locked_verify_provenance` forces a recheck rather than reusing what

@@ -105,17 +105,15 @@ done
 section "Lockfile"
 lock_setting=$(mise settings get lockfile 2>/dev/null || echo "unset")
 if [ "$lock_setting" = "true" ]; then
-    if [ -f mise.lock ]; then
-        log_success "settings.lockfile = true and mise.lock exists"
-        mise lock --dry-run || log_warn "mise lock --dry-run reported drift"
-        SUMMARY+=("lockfile: present")
-    else
-        fail "settings.lockfile = true but mise.lock is missing; run: mise lock"
-        SUMMARY+=("lockfile: MISSING")
-    fi
+    log_warn "settings.lockfile = true adds a trust prompt and is not needed once mise.lock is committed"
+fi
+if [ -f mise.lock ]; then
+    log_success "mise.lock present"
+    mise lock --dry-run || log_warn "mise lock --dry-run reported drift"
+    SUMMARY+=("lockfile: present")
 else
-    log_warn "settings.lockfile is $lock_setting; set it to true and commit mise.lock"
-    SUMMARY+=("lockfile: off")
+    fail "no mise.lock; run: mise lock, then commit it"
+    SUMMARY+=("lockfile: MISSING")
 fi
 
 section "gitignore"

@@ -75,9 +75,14 @@ which version wins. Use `mise.<env>.toml` for variation instead.
 
 ## Lockfile
 
-Set `[settings] lockfile = true`, run `mise lock`, and commit `mise.lock` next to `mise.toml`.
-CI installs with `mise install --locked` (or `MISE_LOCKED=1`), which requires pre-resolved URLs and
-makes no API calls to GitHub or aqua.
+Run `mise lock` once and commit `mise.lock` next to `mise.toml`. CI installs with
+`mise install --locked` (or `MISE_LOCKED=1`), which requires pre-resolved URLs and makes no API
+calls to GitHub or aqua.
+
+**Do not add `[settings] lockfile = true` to a repo config.** Measured on 2026.8.12: once
+`mise.lock` exists, `mise install` maintains it with no setting anywhere, and a committed lockfile
+always exists for whoever clones. The setting only makes mise *create* a lockfile that is not there
+yet, and it costs the config its trust-free status. Leave it out.
 
 - `mise lock --bump` moves the lockfile. `mise upgrade --bump` moves the pin in `mise.toml`.
   They are different commands; pick deliberately.
@@ -137,16 +142,15 @@ both tools hook the shell and fight over PATH. `references/env.md` has the migra
 
 ## Trust
 
-Verified on 2026.8.12: `[tools]` and plain `[tasks]` are "safe" and need no trust, while **`[env]`
-and `[settings]` both require it.** Any config that sets the lockfile or an env var will therefore
-prompt on first use. That is expected, not a mistake.
+Measured on 2026.8.12: `[tools]` and plain `[tasks]` are "safe" and need no trust, while `[env]` and
+`[settings]` each require it. A config limited to tools and tasks never prompts, which is the main
+reason to keep `[settings]` out of it.
 
-- Run `mise trust` once per clone, and say so in the repo README when a config needs it.
-- Put `lockfile = true` in your own global config so your repos get lockfiles without every repo
-  config carrying a `[settings]` block. Put it in the repo config when the team must have it, and
-  accept the trust step.
+`[env]` is worth the prompt when a repo needs env vars. Run `mise trust` once per clone and say so
+in the README.
+
 - Auto-trust your own tree with `settings.trusted_config_paths` in the global config.
-- Never `mise trust -a`.
+- Never `mise trust -a`. It trusts the current directory, its parents and its subdirectories at once.
 
 ## Deprecated forms, never write these
 

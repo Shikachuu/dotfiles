@@ -1,6 +1,6 @@
 ---
 name: unslop
-description: Use when editing existing prose to remove AI tells - docs, READMEs, PR and commit bodies, release notes, drafts. Activate on "unslop this", "this reads like ChatGPT", "make this sound human", "do a style pass", "cut the em dashes". Do not use for code refactoring, translation, or writing new content.
+description: Use when editing, reviewing, or rewriting existing prose so it stops reading as AI-generated - docs, READMEs, PR and commit bodies, release notes, changelogs, blog posts, drafts. Activate when the user says "unslop this", "de-slop this", "remove the AI tells", "this reads like ChatGPT", "this sounds like an LLM wrote it", "make this sound human", "why does this sound so generated", "clean up the writing", "do a style pass", "tighten this doc", "review the prose", or "cut the em dashes". Do not use for code refactoring, translation, or writing new content from scratch.
 ---
 
 # Unslop

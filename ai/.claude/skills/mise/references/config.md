@@ -8,7 +8,6 @@ Highest first, within one directory:
 mise.local.toml
 mise.toml
 mise/config.toml
-mise/conf.d/*.toml           alphabetical
 .mise/config.toml
 .mise/conf.d/*.toml
 .config/mise.toml
@@ -57,16 +56,16 @@ min_version = { soft = "2026.1.0" }
 [tools]
 node = "26"
 python = ["3.11", "3.12"]                 # first wins on PATH
-ruby = { version = "3", postinstall = "gem install bundler" }
-go = { version = "1.21", os = ["linux", "macos"] }
+ruby = { version = "3", postinstall = "gem install bundler" }   # inline table: needs mise trust
+go = { version = "1.21", os = ["linux", "macos"] }              # inline table: needs mise trust
 
 [vars]
 prefix = "dev"
 database_url = "postgres://localhost/{{ vars.prefix }}_db"
 
 [settings]
-lockfile = true
 idiomatic_version_file_enable_tools = ["node"]
+# not lockfile: `mise lock` needs no setting, and [settings] costs a trust prompt
 
 [tool_alias.node.versions]
 team_default = "22"                       # mise install node@team_default
@@ -80,11 +79,14 @@ form. mise releases weekly, so a hard pin to whatever version happened to be ins
 colleague's working mise for no reason. `min_version = { hard = "..." }` is for a feature floor you
 can name.
 
+A string or list value in `[tools]` keeps the config trust-free. An inline table or a `[tools.x]`
+section does not, so reach for one only when a tool needs the option. See `lockfile-trust.md`.
+
 `[tools]`, `[env]` and `[settings]` merge additively with the child overriding the parent per key.
 They do not union: a list-valued setting in a higher-precedence file replaces the lower one outright
 rather than appending to it.
 
-`mise settings` has 167 keys. Do not enumerate them; read
+`mise settings` has well over a hundred keys. Do not enumerate them; read
 <https://mise.jdx.dev/configuration/settings.html> or run `mise settings`.
 
 ## Idiomatic version files

@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
-# mise config gate: what loads -> deprecations -> tasks -> lockfile -> gitignore -> doctor.
+# mise config gate: deprecations -> what loads -> tasks -> lockfile -> gitignore -> doctor.
 set -euo pipefail
+shopt -s nullglob
 
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-BLUE='\033[0;34m'
-NC='\033[0m'
+if [ -t 1 ]; then
+    RED='\033[0;31m'; GREEN='\033[0;32m'; YELLOW='\033[1;33m'; BLUE='\033[0;34m'; NC='\033[0m'
+else
+    RED=''; GREEN=''; YELLOW=''; BLUE=''; NC=''
+fi
 
 log_info()    { echo -e "${BLUE}[INFO]${NC} $1"; }
 log_success() { echo -e "${GREEN}[SUCCESS]${NC} $1"; }
@@ -26,10 +27,16 @@ SUMMARY=()
 FAILED=0
 fail() { log_error "$1"; FAILED=1; }
 
-# Project configs that belong to this repo. Parent and global configs are out of
-# scope: this gate checks what the repo ships, not the machine it runs on.
+# Every project-level location mise reads, in precedence order. Missing one means
+# the gate silently ignores a config mise actually loads.
 CONFIGS=()
-for f in mise.toml .mise.toml mise.*.toml .mise/config.toml .config/mise/config.toml .config/mise.toml; do
+for f in \
+    mise.local.toml .mise.local.toml mise.*.local.toml \
+    mise.toml .mise.toml mise.*.toml .mise.*.toml \
+    mise/config.toml \
+    .mise/config.toml .mise/conf.d/*.toml \
+    .config/mise.toml .config/mise/config.toml .config/mise/conf.d/*.toml
+do
     [ -f "$f" ] && CONFIGS+=("$f")
 done
 if (( ${#CONFIGS[@]} == 0 )); then
@@ -37,23 +44,27 @@ if (( ${#CONFIGS[@]} == 0 )); then
     exit 1
 fi
 
-# mise accepts all of these today and warns, or silently plans removal. None are
-# reported by any mise subcommand, so grep is the only check available.
+# mise accepts most of these and only warns, so they look correct until removed.
 section "Deprecated forms"
 dep_hit=0
+# Comments are stripped first so a config that quotes these rules in a comment
+# does not trip the grep. sed keeps the line count, so line numbers stay right.
 check_dep() {
-    local pattern=$1 msg=$2 hits
-    if hits=$(grep -nE "$pattern" "${CONFIGS[@]}" 2>/dev/null); then
-        printf '%s\n' "$hits" | sed 's/^/    /'
-        fail "$msg"
-        dep_hit=1
-    fi
+    local pattern=$1 msg=$2 found=0 hits c
+    for c in "${CONFIGS[@]}"; do
+        if hits=$(sed 's/#.*//' "$c" | grep -nE "$pattern"); then
+            printf '%s\n' "$hits" | sed "s|^|    $c:|"
+            found=1
+        fi
+    done
+    if (( found )); then fail "$msg"; dep_hit=1; fi
+    return 0
 }
-check_dep '^\[alias\]'                        'use [tool_alias] or [shell_alias], not [alias]'
-check_dep '^[[:space:]]*(env_file|dotenv|env_path)[[:space:]]*='  'use [env] _.file / _.path, not top-level env_file/dotenv/env_path'
-check_dep '_\.venv'                           'use [env] _.python.venv, not _.venv'
+check_dep '^\[alias(\.|\])'                   'use [tool_alias] or [shell_alias], not [alias]'
+check_dep '^[[:space:]]*(env_file|dotenv|env_path)[[:space:]]*=' 'use [env] _.file / _.path, not top-level env_file/dotenv/env_path'
+check_dep '_\.venv[[:space:]]*='              'use [env] _.python.venv, not _.venv'
 check_dep '\{\{[[:space:]]*(arg|option|flag)\(' 'use the usage field for task args, not the Tera arg()/option()/flag() helpers'
-check_dep '(^|["[:space:]])ubi:'              'ubi is deprecated upstream; prefer aqua or github'
+check_dep '(^[[:space:]]*"?|=[[:space:]]*"?)ubi:' 'ubi is deprecated upstream; prefer aqua or github'
 if (( dep_hit == 0 )); then
     log_success "no deprecated forms"
     SUMMARY+=("deprecations: clean")
@@ -62,54 +73,79 @@ else
 fi
 
 section "Configs that actually load"
-mise config ls || log_warn "mise could not list configs; see errors above"
+if mise config ls; then
+    SUMMARY+=("config: ${#CONFIGS[@]} project file(s), parsed")
+else
+    fail "mise could not parse the config; fix the errors above before trusting anything below"
+    SUMMARY+=("config: PARSE FAILED")
+fi
+IS_GIT=0
+git rev-parse --git-dir >/dev/null 2>&1 && IS_GIT=1
 for c in "${CONFIGS[@]}"; do
     case "$c" in
-        *.local.toml)
-            if git -C "$DIR" ls-files --error-unmatch "$c" >/dev/null 2>&1; then
+        *local.toml)
+            if (( IS_GIT )) && git ls-files --error-unmatch "$c" >/dev/null 2>&1; then
                 fail "$c is committed; a local override outranks mise.toml for the whole team"
             fi
             ;;
     esac
 done
-SUMMARY+=("config: ${#CONFIGS[@]} project file(s) found")
 
 section "Resolved tool versions"
-mise ls --current || true
-SUMMARY+=("tools: resolved")
+if mise ls --current; then
+    SUMMARY+=("tools: resolved")
+else
+    fail "could not resolve tool versions"
+    SUMMARY+=("tools: UNRESOLVED")
+fi
 
 section "Tasks"
 mise tasks ls || true
-if mise tasks validate 2>&1; then
+if mise tasks validate; then
     SUMMARY+=("tasks: valid")
 else
     fail "mise tasks validate reported errors"
     SUMMARY+=("tasks: INVALID")
 fi
-# mise does not require a description, but `mise tasks ls` is the discovery path.
 while IFS= read -r t; do
     [ -n "$t" ] || continue
     d=$(mise tasks info "$t" --json 2>/dev/null | jq -r '.description // ""')
     [ -n "$d" ] || log_warn "task '$t' has no description"
-done < <(mise tasks ls --no-header 2>/dev/null | awk '{print $1}')
+done < <(mise tasks ls --name-only 2>/dev/null)
 
 # mise omits a non-executable file task from `mise tasks ls` entirely; only
-# `mise run <name>` explains why. Catch it here instead.
+# `mise run <name>` explains why. Docs and sourced helpers are not tasks, so skip
+# them rather than failing a valid layout.
 for d in mise-tasks .mise-tasks mise/tasks .mise/tasks .config/mise/tasks; do
     [ -d "$d" ] || continue
     while IFS= read -r -d '' f; do
-        [ -x "$f" ] || fail "$f is not executable, so mise will not discover it (chmod +x)"
-    done < <(find "$d" -type f ! -name '.*' -print0 2>/dev/null)
+        case "${f##*/}" in .*|*.md|*.txt|LICENSE*) continue ;; esac
+        case "$f" in */lib/*|*/_lib/*|*/.*/*) continue ;; esac
+        [ -x "$f" ] && continue
+        # Only a file that means to be a task: docs and sourced helpers have no shebang.
+        head -c 2 "$f" 2>/dev/null | grep -q '#!' \
+            && fail "$f has a shebang but is not executable, so mise will not discover it (chmod +x)"
+    done < <(find "$d" -type f -print0 2>/dev/null)
 done
 
 section "Lockfile"
-lock_setting=$(mise settings get lockfile 2>/dev/null || echo "unset")
-if [ "$lock_setting" = "true" ]; then
+if grep -qE '^[[:space:]]*lockfile[[:space:]]*=[[:space:]]*true' "${CONFIGS[@]}" 2>/dev/null; then
     log_warn "settings.lockfile = true adds a trust prompt and is not needed once mise.lock is committed"
 fi
 if [ -f mise.lock ]; then
-    log_success "mise.lock present"
-    mise lock --dry-run || log_warn "mise lock --dry-run reported drift"
+    if grep -q 'lockfile_version\|^\[\[tools\.' mise.lock; then
+        log_success "mise.lock present"
+    else
+        fail "mise.lock exists but has no lockfile_version or [[tools.*]]; it looks corrupt, regenerate with: mise lock"
+    fi
+    if (( IS_GIT )) && ! git ls-files --error-unmatch mise.lock >/dev/null 2>&1; then
+        fail "mise.lock is not tracked by git; commit it"
+    fi
+    if [ -n "${MISE_OFFLINE:-}" ]; then
+        log_info "MISE_OFFLINE set, skipping the drift check"
+    else
+        mise lock --dry-run || log_warn "mise lock --dry-run reported drift (or could not reach the network)"
+    fi
     SUMMARY+=("lockfile: present")
 else
     fail "no mise.lock; run: mise lock, then commit it"
@@ -117,15 +153,14 @@ else
 fi
 
 section "gitignore"
-if git -C "$DIR" rev-parse --git-dir >/dev/null 2>&1; then
-    if git -C "$DIR" check-ignore -q mise.lock 2>/dev/null; then
+if (( IS_GIT )); then
+    if git check-ignore -q mise.lock 2>/dev/null; then
         fail "mise.lock is gitignored; it must be committed"
     else
         log_success "mise.lock is not ignored"
     fi
-    for f in mise.local.toml .env; do
-        git -C "$DIR" check-ignore -q "$f" 2>/dev/null \
-            || log_warn "$f is not gitignored"
+    for pat in mise.local.toml mise.dev.local.toml .env; do
+        git check-ignore -q "$pat" 2>/dev/null || log_warn "$pat is not gitignored"
     done
     SUMMARY+=("gitignore: checked")
 else

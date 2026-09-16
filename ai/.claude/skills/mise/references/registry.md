@@ -38,7 +38,7 @@ and describe a `packslip` backend that this build does not have.
 
 | Backend | Example | Notes |
 |---|---|---|
-| core | `core:node` | built in: node, python, ruby, go, java, deno, bun, rust, erlang, zig |
+| core | `core:node` | built in, 14 registry entries: node, python, ruby, go, java, deno, bun, rust, erlang, zig, dotnet, elixir, swift |
 | aqua | `aqua:BurntSushi/ripgrep` | curated, verifies checksums and signatures |
 | github | `github:owner/repo` | release assets |
 | gitlab | `gitlab:user/project` | |
@@ -77,5 +77,6 @@ ripgrep = "15"                       # registry default is aqua:BurntSushi/ripgr
 "ubi:BurntSushi/ripgrep" = { version = "14", exe = "rg" }   # deprecated, shown for recognition only
 ```
 
-Other `[tools]` option keys: `version`, `path`, `prefix`, `ref`, `os`, `minimum_release_age`,
-`version_order`, plus backend-specific ones such as `exe`.
+Other `[tools]` option keys: `version`, `path`, `prefix`, `ref`, `os`, `install_before`,
+`minimum_release_age`, `version_order`, plus backend-specific ones such as `exe`. Any of them makes
+the entry an inline table, which costs a trust prompt; see `lockfile-trust.md`.

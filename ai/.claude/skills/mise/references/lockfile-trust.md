@@ -13,12 +13,12 @@ The lockfile name mirrors the config: `mise.toml` gives `mise.lock`, `mise.test.
 `mise.test.lock`. Dependency sidecars live in `.mise/locks/`.
 
 ```toml
-lockfile_version = 2
+lockfile_version = 1
 
 [[tools.node]]
 version = "26.8.1"
 backend = "core:node"
-specifiers = ["26.8.1"]
+specifiers = ["26"]
 
 [tools.node."platforms.macos-arm64"]
 checksum = "sha256:6e577fd0d9db776db8230..."
@@ -57,13 +57,21 @@ Verified on mise 2026.8.12 by running each variant:
 
 | Config contains | Trust needed |
 |---|---|
-| `[tools]` only | no |
-| `[tools]` and plain `[tasks]` | no |
-| `[settings]` | **yes** |
+| `[tools]` with string values (`node = "26"`) | no |
+| `[tools]` with list values (`python = ["3.12"]`) | no |
+| `[tools]` with an inline table (`go = { version = "1.21" }`) | **yes** |
+| `[tools.x]` as its own section | **yes** |
+| `[tasks]` without templates or tool options | no |
 | `[env]` | **yes** |
+| `[settings]` | **yes** |
+| `[vars]` | **yes** |
+| `[hooks]` | **yes** |
 
-So a config that sets an env var or any setting prompts on first use. Keeping `[settings]` out of
-repo configs, as the lockfile section above argues, means only `[env]` costs you a prompt.
+Confirmed as not requiring trust: `min_version`, top-level `redactions`, a task with its own `env`
+table, and a `mise-tasks/` file task.
+
+A plain tools-and-tasks config never prompts. The first tool option, env var, var or hook changes
+that, which is a reason to reach for them only when needed rather than a reason to avoid them.
 
 ```sh
 mise trust                  # trust the config here or in a parent

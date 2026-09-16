@@ -51,6 +51,7 @@ mise-tasks/         file tasks, each one executable
 ```
 mise.local.toml
 mise.*.local.toml
+mise.local.lock
 .env
 ```
 
@@ -142,12 +143,21 @@ both tools hook the shell and fight over PATH. `references/env.md` has the migra
 
 ## Trust
 
-Measured on 2026.8.12: `[tools]` and plain `[tasks]` are "safe" and need no trust, while `[env]` and
-`[settings]` each require it. A config limited to tools and tasks never prompts, which is the main
-reason to keep `[settings]` out of it.
+Measured on 2026.8.12. What a config contains decides whether mise prompts:
 
-`[env]` is worth the prompt when a repo needs env vars. Run `mise trust` once per clone and say so
-in the README.
+| Config contains | Trust needed |
+|---|---|
+| `[tools]` with string or list-of-strings values | no |
+| `[tools]` with an inline table or a `[tools.x]` section | **yes** |
+| `[tasks]` without templates or tool options | no |
+| `[env]`, `[settings]`, `[vars]`, `[hooks]` | **yes** |
+
+So `node = "26"` costs nothing, but `go = { version = "1.21", os = ["linux"] }` costs a prompt.
+That is the practical reason to keep tool options out of a config until a tool actually needs one,
+and it is why the lockfile rule above matters: `[settings]` would add the prompt for nothing.
+
+A prompt is fine when a repo genuinely needs `[env]` or a tool option. Run `mise trust` once per
+clone and say so in the README.
 
 - Auto-trust your own tree with `settings.trusted_config_paths` in the global config.
 - Never `mise trust -a`. It trusts the current directory, its parents and its subdirectories at once.

@@ -29,6 +29,8 @@ suggest_pin() {
     local v=$1 name=$2 major=${1%%.*}
     if [[ $major =~ ^[0-9]{4}$ ]] && (( major >= 2000 )); then
         printf '%s' "$v"                       # calver: a major is a whole year
+    elif [ "$major" = "0" ]; then
+        printf '%s' "${v%.*}"                  # 0.x: every minor is a breaking change
     elif [[ $MINOR_MATTERS == *" $name "* ]]; then
         printf '%s' "${v%.*}"                  # major.minor
     else

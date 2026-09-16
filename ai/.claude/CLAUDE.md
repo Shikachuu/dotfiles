@@ -20,7 +20,7 @@ Applies to prose I write: chat replies, markdown, READMEs, PR and commit bodies.
 - Colons only before a list or example, never as a mid-sentence connector. Sentence case headings. Bold sparingly, never on every proper noun. No "**Label:** restates the line" bullets; write prose.
 - Say what it does, not how it feels. Name the mechanism, a fact, or a number. If a sentence could appear unchanged in another project's docs, cut it.
 - No mannered prose: aphorisms, rhetorical fragments, personified code, figurative verbs. No generic conclusions ("the future looks bright"); state specific plans or facts.
-- Full ruleset with stable rule ids is in the unslop skill. Run it on any document before it ships.
+- These bullets are the summary. Load the unslop skill for a full editing pass on a document; it has the complete ruleset with stable rule ids.
 
 ## Autonomy
 

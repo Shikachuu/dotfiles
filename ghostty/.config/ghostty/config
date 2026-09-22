@@ -27,7 +27,7 @@ background-blur = macos-glass-regular
 
 # Set the window decoration to be as close as possible both in mac and linux
 window-decoration = auto
-macos-titlebar-style = tabs
+macos-titlebar-style = transparent
 adw-toolbar-style = raised-border
 
 # Keybindings

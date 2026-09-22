@@ -30,7 +30,9 @@
       "Bash(wc *)",
       "Bash(tree *)"
     ],
-    "deny": ["Bash(rm *)"],
+    "deny": [
+      "Bash(rm *)"
+    ],
     "defaultMode": "auto"
   },
   "model": "opus[1m]",
@@ -52,7 +54,7 @@
       }
     }
   },
-  "effortLevel": "xhigh",
+  "outputStyle": "Concise",
   "promptSuggestionEnabled": false,
   "tui": "fullscreen",
   "skipWorkflowUsageWarning": true,
@@ -61,5 +63,10 @@
   "preferredNotifChannel": "ghostty",
   "switchModelsOnFlag": true,
   "inputNeededNotifEnabled": true,
-  "skipAutoPermissionPrompt": true
+  "skipAutoPermissionPrompt": true,
+  "modelSettings": {
+    "claude-opus-5": {
+      "effortLevel": "high"
+    }
+  }
 }

@@ -4,11 +4,22 @@ return {
   priority = 10,
   config = function()
     require("tree-sitter-manager").setup({
+      languages = {
+        dotprompt = {
+          install_info = {
+            url = "https://github.com/google/dotprompt",
+            branch = "main",
+            location = "packages/treesitter",
+            queries = "queries",
+          },
+        },
+      },
       ensure_installed = {
         "bash",
         "caddy",
         "css",
         "dockerfile",
+        "dotprompt",
         "git_rebase",
         "gitattributes",
         "gitcommit",
@@ -45,5 +56,7 @@ return {
     local ts_functions = require("functions.treesitter")
 
     ts_functions.setup_gotmpl()
+    ts_functions.setup_starlark()
+    ts_functions.setup_dotprompt()
   end,
 }

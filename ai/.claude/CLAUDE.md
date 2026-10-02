@@ -34,6 +34,7 @@ Applies to prose I write: chat replies, markdown, READMEs, PR and commit bodies.
 ## Process
 
 - For non-trivial work, outline a short step list first, then execute end-to-end without stopping between steps.
+- For vague or multi-decision work, suggest `/spec` before plan mode.
 - Work loop: edit -> format and lint the touched files with the project's configured tools -> run the project's tests/build -> strip the comments with /no-comments -> on non-trivial changes run /verify (reviewer + test-engineer + comment-auditor) -> report the verdict. Repeat until green.
 - Ship new logic with tests by default, mirroring the repo's existing test style.
 

@@ -3,6 +3,7 @@ tap "jesseduffield/lazygit"
 tap "nikitabobko/tap"
 tap "anomalyco/tap"
 tap "tw93/tap"
+tap "abue-ammar/tinycast"
 
 brew "awscli"
 brew "bash"
@@ -44,6 +45,7 @@ cask "legcord"
 cask "libreoffice"
 cask "spotify"
 cask "tablepro"
+cask "abue-ammar/tinycast/tinycast"
 
 mas "AdGuard Mini", id: 1440147259
 mas "Bitwarden", id: 1352778147

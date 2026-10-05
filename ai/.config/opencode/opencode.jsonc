@@ -1,0 +1,10 @@
+{
+    "$schema": "https://opencode.ai/config.json",
+    "theme": "cyberdream",
+    "model": "opencode-go/deepseek-v4.1-flash",
+    "small_model": "opencode-go/space-bunny-free",
+    "autoupdate": true,
+    "plugin": [
+        "opencode-mem@latest",
+    ]
+}

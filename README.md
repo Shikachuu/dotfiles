@@ -20,11 +20,14 @@ stow -v -R -t $HOME <package>
 
 ## Packages
 
+- `ai` (Claude Code and OpenCode configurations)
 - `bash`
 - `git`
 - `nvim`
 - `ghostty`
+- `television`
 - `mise`
+- `lima`
 - `macos` (for macOS specific configurations)
 
 ## License

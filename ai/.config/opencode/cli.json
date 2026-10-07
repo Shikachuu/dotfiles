@@ -1,0 +1,14 @@
+{
+  "$schema": "https://opencode.ai/v2/cli.json",
+  "session": {
+    "sidebar": "hide",
+    "scrollbar": true,
+    "thinking": "show",
+    "image_preview": true
+  },
+  "mouse": true,
+  "animations": true,
+  "theme": {
+    "name": "cyberdream"
+  }
+}

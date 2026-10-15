@@ -1,0 +1,26 @@
+{
+  "should_trigger": [
+    "open a PR for this branch",
+    "create the pull request against main",
+    "write the PR description",
+    "rewrite the body of PR 42, it's too long",
+    "update the PR title to match commitlint",
+    "add the QA results to the PR",
+    "wrap up the PR",
+    "is this draft ready for review?",
+    "mark the PR ready",
+    "raise a draft PR for the auth refactor"
+  ],
+  "should_not_trigger": [
+    "review PR 57 for bugs",
+    "reply to the review comments on my PR",
+    "set up a GitHub Actions workflow for PR checks",
+    "write a commit message for these changes",
+    "rebase my branch on main",
+    "create a GitHub issue for this bug",
+    "unslop this README",
+    "explain what a pull request is",
+    "add a CODEOWNERS file",
+    "the CI check on my PR is failing, fix it"
+  ]
+}

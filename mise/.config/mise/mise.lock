@@ -2,46 +2,6 @@
 
 lockfile_version = 3
 
-[[tools."aqua:anomalyco/opencode"]]
-version = "1.19.3"
-backend = "aqua:anomalyco/opencode"
-specifiers = ["latest"]
-
-[tools."aqua:anomalyco/opencode"."platforms.linux-arm64"]
-checksum = "sha256:7900818a6a98881edbbadab4b7525940eff3b9750040c200481f9f56cacee405"
-url = "https://github.com/anomalyco/opencode/releases/download/v1.19.3/opencode-linux-arm64.tar.gz"
-url_api = "https://api.github.com/repos/anomalyco/opencode/releases/assets/647209228"
-
-[tools."aqua:anomalyco/opencode"."platforms.linux-arm64-musl"]
-checksum = "sha256:7900818a6a98881edbbadab4b7525940eff3b9750040c200481f9f56cacee405"
-url = "https://github.com/anomalyco/opencode/releases/download/v1.19.3/opencode-linux-arm64.tar.gz"
-url_api = "https://api.github.com/repos/anomalyco/opencode/releases/assets/647209228"
-
-[tools."aqua:anomalyco/opencode"."platforms.linux-x64"]
-checksum = "sha256:13a8fb2978302071b86f9d7e00da9c8895f9cd846978379c3bdc6a5333536c9b"
-url = "https://github.com/anomalyco/opencode/releases/download/v1.19.3/opencode-linux-x64.tar.gz"
-url_api = "https://api.github.com/repos/anomalyco/opencode/releases/assets/647209173"
-
-[tools."aqua:anomalyco/opencode"."platforms.linux-x64-baseline"]
-checksum = "sha256:13a8fb2978302071b86f9d7e00da9c8895f9cd846978379c3bdc6a5333536c9b"
-url = "https://github.com/anomalyco/opencode/releases/download/v1.19.3/opencode-linux-x64.tar.gz"
-url_api = "https://api.github.com/repos/anomalyco/opencode/releases/assets/647209173"
-
-[tools."aqua:anomalyco/opencode"."platforms.linux-x64-musl"]
-checksum = "sha256:13a8fb2978302071b86f9d7e00da9c8895f9cd846978379c3bdc6a5333536c9b"
-url = "https://github.com/anomalyco/opencode/releases/download/v1.19.3/opencode-linux-x64.tar.gz"
-url_api = "https://api.github.com/repos/anomalyco/opencode/releases/assets/647209173"
-
-[tools."aqua:anomalyco/opencode"."platforms.linux-x64-musl-baseline"]
-checksum = "sha256:13a8fb2978302071b86f9d7e00da9c8895f9cd846978379c3bdc6a5333536c9b"
-url = "https://github.com/anomalyco/opencode/releases/download/v1.19.3/opencode-linux-x64.tar.gz"
-url_api = "https://api.github.com/repos/anomalyco/opencode/releases/assets/647209173"
-
-[tools."aqua:anomalyco/opencode"."platforms.macos-arm64"]
-checksum = "sha256:c2d0fecd27acf6e08be02c1f5d384614d07495587766bcc4a6bff3971749bb64"
-url = "https://github.com/anomalyco/opencode/releases/download/v1.19.3/opencode-darwin-arm64.zip"
-url_api = "https://api.github.com/repos/anomalyco/opencode/releases/assets/647222664"
-
 [[tools."aqua:max-sixty/worktrunk"]]
 version = "0.80.0"
 backend = "aqua:max-sixty/worktrunk"
@@ -233,6 +193,15 @@ version = "0.12.0"
 aube = { path = "locks/npm-getpaseo-cli/0.12.0", digest = "sha256:f2298f9ea4125ca7210e5d06ce4bddf7ae0a79167d81e6b9269d9515b1c061d1" }
 backend = "npm:@getpaseo/cli"
 specifiers = ["0.12.0"]
+
+[[tools."npm:@opencode/cli"]]
+version = "2.1.0"
+aube = { path = "locks/npm-opencode-cli/2.1.0~009061c2", digest = "sha256:4b5b55eeadb6c2e6613fc3395ec846e56c7b37df045822a4a3228624c42f9cf7" }
+backend = "npm:@opencode/cli"
+specifiers = ["latest"]
+
+[tools."npm:@opencode/cli".options]
+allow_builds = '["@opencode/cli"]'
 
 [[tools.opentofu]]
 version = "1.13.1"

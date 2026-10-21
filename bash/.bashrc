@@ -92,9 +92,9 @@ alias flatpak-import='xargs -n2 flatpak install -y'
 source <(mise completion --include-bash-completion-lib bash)
 [[ -r "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh" ]] && source "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
 [[ -r "/usr/share/bash-completion/bash_completion" ]] && source "/usr/share/bash-completion/bash_completion"
+eval "$(mise activate bash)"
 eval "$(starship init bash)"
 eval "$(zoxide init bash)"
-eval "$(mise activate bash)"
 eval "$(tv init bash)"
 source <(kubectl completion bash)
 

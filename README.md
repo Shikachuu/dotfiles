@@ -27,8 +27,21 @@ stow -v -R -t $HOME <package>
 - `ghostty`
 - `television`
 - `mise`
-- `lima`
-- `macos` (for macOS specific configurations)
+- `lima` (macOS only, not stowed)
+- `macos` (macOS specific configuration, not stowed)
+- `linux` (Fedora setup script, not stowed)
+
+## Fedora
+
+`linux/setup.sh` installs every tool the dotfiles use on Fedora 44 or newer: dnf packages from `linux/packages.txt`, Docker CE, Claude Code, and the mise tools that Fedora does not package. It also runs the Paseo daemon as a systemd user service. It does not stow anything or install Neovim plugins: after stowing, run `nvim` once to install plugins, mason packages and tree-sitter parsers.
+
+```bash
+linux/setup.sh
+mv ~/.bashrc ~/.bashrc.fedora && mv ~/.bash_profile ~/.bash_profile.fedora
+stow -v -R -t $HOME ai bash git nvim television mise
+```
+
+The mise config pins tools in `mise/.config/mise/mise.lock`. Refresh it with `mise lock --global --platform linux-x64,linux-arm64,macos-arm64`.
 
 ## License
 

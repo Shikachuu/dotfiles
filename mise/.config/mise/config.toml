@@ -1,8 +1,20 @@
 [settings]
 experimental = true
 idiomatic_version_file_enable_tools = ["node", "python"]
+lockfile = true
 
 [tools]
 bun = "1.2.18"
 node = "latest"
 opentofu = "latest"
+
+starship = { version = "latest", os = ["linux"] }
+lazygit = { version = "latest", os = ["linux"] }
+television = { version = "latest", os = ["linux"] }
+kubectl = { version = "latest", os = ["linux"] }
+tflint = { version = "latest", os = ["linux"] }
+terraform-docs = { version = "latest", os = ["linux"] }
+trivy = { version = "latest", os = ["linux"] }
+"aqua:max-sixty/worktrunk" = { version = "latest", os = ["linux"] }
+"aqua:anomalyco/opencode" = { version = "latest", os = ["linux"] }
+"npm:@getpaseo/cli" = { version = "0.12.0", os = ["linux"] }

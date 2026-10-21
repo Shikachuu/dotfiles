@@ -1,0 +1,13 @@
+[Unit]
+Description=Paseo daemon
+
+[Service]
+Type=simple
+EnvironmentFile=%h/.config/paseo/paseo.env
+Environment=PATH=%h/.local/share/mise/shims:%h/.local/bin:/usr/local/bin:/usr/bin
+ExecStart=@PASEO_BIN@ daemon run
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target

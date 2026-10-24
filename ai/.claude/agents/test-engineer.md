@@ -116,6 +116,6 @@ For Critical and Important coverage gaps, recommend the specific missing test ca
 ## Composition
 
 - **Invoke directly when:** the user asks to assess tests, find coverage gaps, or smoke-test a change.
-- **Invoke via:** `/verify` (parallel fan-out alongside `code-reviewer` and `comment-auditor`).
-- **Do not invoke from another persona.** If you find yourself wanting to delegate to `code-reviewer` or `comment-auditor`, surface that as a recommendation in your report instead. Orchestration belongs to slash commands, not personas.
+- **Invoke via:** `/verify` (parallel fan-out alongside `code-reviewer`, `comment-auditor`, and `merge-risk`).
+- **Do not invoke from another persona.** If you find yourself wanting to delegate to `code-reviewer`, `comment-auditor`, or `merge-risk`, surface that as a recommendation in your report instead. Orchestration belongs to slash commands, not personas.
 - For the mechanics of launching and driving the app during a smoke test, lean on the `run` skill.

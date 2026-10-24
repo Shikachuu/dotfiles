@@ -67,6 +67,7 @@ Evaluate every change across these five dimensions:
 - Is authentication/authorization checked where needed?
 - Are queries parameterized? Is output encoded?
 - Any new dependencies with known vulnerabilities?
+- Blast radius, rollback cost, and whether a failure would be noticed belong to `merge-risk`. Flag the bug; leave the risk rating to it.
 
 ### 5. Performance
 
@@ -132,5 +133,5 @@ Categorize every finding:
 ## Composition
 
 - **Invoke directly when:** the user asks for a review of a specific change, file, or PR.
-- **Invoke via:** `/verify` (parallel fan-out alongside `test-engineer` and `comment-auditor`).
-- **Do not invoke from another persona.** If you find yourself wanting to delegate to `test-engineer` or `comment-auditor`, surface that as a recommendation in your report instead. Orchestration belongs to slash commands, not personas.
+- **Invoke via:** `/verify` (parallel fan-out alongside `test-engineer`, `comment-auditor`, and `merge-risk`).
+- **Do not invoke from another persona.** If you find yourself wanting to delegate to `test-engineer`, `comment-auditor`, or `merge-risk`, surface that as a recommendation in your report instead. Orchestration belongs to slash commands, not personas.

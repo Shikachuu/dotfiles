@@ -40,7 +40,7 @@ Evaluate every change across these five dimensions:
 ### 1. Correctness
 
 - Does the code do what the spec/task says it should?
-- Are edge cases handled (null, empty, boundary values, error paths)?
+- Are edge cases handled (null, empty, boundary values, error paths)? Under `/verify`, flag the ones you trip over and leave the enumeration to `edge-case-hunter`. Invoked directly, enumerate them yourself.
 - Do the tests actually verify the behavior? Are they testing the right things?
 - Are there race conditions, off-by-one errors, or state inconsistencies?
 
@@ -133,5 +133,5 @@ Categorize every finding:
 ## Composition
 
 - **Invoke directly when:** the user asks for a review of a specific change, file, or PR.
-- **Invoke via:** `/verify` (parallel fan-out alongside `test-engineer`, `comment-auditor`, and `merge-risk`).
-- **Do not invoke from another persona.** If you find yourself wanting to delegate to `test-engineer`, `comment-auditor`, or `merge-risk`, surface that as a recommendation in your report instead. Orchestration belongs to slash commands, not personas.
+- **Invoke via:** `/verify` (parallel fan-out alongside `test-engineer`, `comment-auditor`, `merge-risk`, and `edge-case-hunter`).
+- **Do not invoke from another persona.** If you find yourself wanting to delegate to `test-engineer`, `comment-auditor`, `merge-risk`, or `edge-case-hunter`, surface that as a recommendation in your report instead. Orchestration belongs to slash commands, not personas.

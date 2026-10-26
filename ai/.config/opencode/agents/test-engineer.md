@@ -20,7 +20,7 @@ Evaluate the testing of every change across these five dimensions:
 
 - Are the critical paths, edge cases, and error/failure paths actually exercised?
 - Treat ~80% line coverage as a floor and ~95% on critical paths as the target, but report concrete untested behaviors, not just a percentage. Coverage past ~80% has diminishing returns; depth on the paths that matter beats breadth everywhere.
-- What happens on null, empty, boundary, and malformed input? On timeouts and downstream failures?
+- What happens on null, empty, boundary, and malformed input? On timeouts and downstream failures? Judge whether the tests exercise those paths; `edge-case-hunter` enumerates the paths the code itself fails to guard.
 
 ### 2. Correctness
 
@@ -118,5 +118,5 @@ For Critical and Important coverage gaps, recommend the specific missing test ca
 ## Composition
 
 - **Invoke directly when:** the user asks to assess tests, find coverage gaps, or smoke-test a change.
-- **Invoke via:** `/verify` (parallel fan-out alongside `code-reviewer`, `comment-auditor`, and `merge-risk`).
-- **Do not invoke from another persona.** If you find yourself wanting to delegate to `code-reviewer`, `comment-auditor`, or `merge-risk`, surface that as a recommendation in your report instead. Orchestration belongs to slash commands, not personas.
+- **Invoke via:** `/verify` (parallel fan-out alongside `code-reviewer`, `comment-auditor`, `merge-risk`, and `edge-case-hunter`).
+- **Do not invoke from another persona.** If you find yourself wanting to delegate to `code-reviewer`, `comment-auditor`, `merge-risk`, or `edge-case-hunter`, surface that as a recommendation in your report instead. Orchestration belongs to slash commands, not personas.

@@ -35,6 +35,9 @@
     ],
     "defaultMode": "auto"
   },
+  "env": {
+    "ARCHIFY_UPDATE_CHECK_DISABLED": "1"
+  },
   "model": "opus[1m]",
   "statusLine": {
     "type": "command",

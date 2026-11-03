@@ -100,6 +100,11 @@ install_mise_tools() {
   mise install --locked -y
 }
 
+install_archify() {
+  log "Installing the archify skill"
+  "$DOTFILES_DIR/scripts/install-archify.sh"
+}
+
 setup_paseo() {
   log "Configuring the paseo service"
   local bin rendered changed=0
@@ -171,6 +176,7 @@ install_packages
 install_vendor_packages
 setup_docker
 install_mise_tools
+install_archify
 setup_paseo
 verify
 next_steps

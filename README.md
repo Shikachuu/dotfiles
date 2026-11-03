@@ -43,6 +43,10 @@ stow -v -R -t $HOME ai bash git nvim television mise
 
 The mise config pins tools in `mise/.config/mise/mise.lock`. Refresh it with `mise lock --global --platform linux-x64,linux-arm64,macos-arm64`.
 
+## Archify
+
+Both setup scripts run `scripts/install-archify.sh`. It sparse-clones the [archify](https://github.com/tt-a1i/archify) skill at a pinned commit into `~/.local/share/archify` and symlinks it to `ai/.claude/skills/archify`, which git ignores. The skill needs only `node` from mise, with no npm install. The Claude settings set `ARCHIFY_UPDATE_CHECK_DISABLED=1`. To update, set `ARCHIFY_TAG` and `ARCHIFY_COMMIT` in the script to a new release (`git ls-remote --tags https://github.com/tt-a1i/archify` lists the peeled `^{}` commit of each tag) and rerun it.
+
 ## License
 
 This project is licensed under the Mozilla Public License 2.0 - see the [LICENSE](LICENSE) file for details.

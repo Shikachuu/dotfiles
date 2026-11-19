@@ -169,5 +169,5 @@ A section with nothing in it gets a single `none` bullet.
 ## Composition
 
 - **Invoke directly when:** the user asks what a change fails to handle, what inputs would break it, or whether a function covers its boundaries.
-- **Invoke via:** `/verify` (parallel fan-out alongside `code-reviewer`, `test-engineer`, `comment-auditor`, and `merge-risk`).
+- **Invoke via:** `/verify` and `/review` (parallel fan-out alongside `code-reviewer`, `test-engineer`, `comment-auditor`, and `merge-risk`).
 - **Do not invoke from another persona.** If you find yourself wanting to delegate to `code-reviewer`, `test-engineer`, `comment-auditor`, or `merge-risk`, surface that as a recommendation in your report instead. Orchestration belongs to slash commands, not personas.

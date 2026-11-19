@@ -118,5 +118,5 @@ For Critical and Important coverage gaps, recommend the specific missing test ca
 ## Composition
 
 - **Invoke directly when:** the user asks to assess tests, find coverage gaps, or smoke-test a change.
-- **Invoke via:** `/verify` (parallel fan-out alongside `code-reviewer`, `comment-auditor`, `merge-risk`, and `edge-case-hunter`).
+- **Invoke via:** `/verify` and `/review` (parallel fan-out alongside `code-reviewer`, `comment-auditor`, `merge-risk`, and `edge-case-hunter`).
 - **Do not invoke from another persona.** If you find yourself wanting to delegate to `code-reviewer`, `comment-auditor`, `merge-risk`, or `edge-case-hunter`, surface that as a recommendation in your report instead. Orchestration belongs to slash commands, not personas.

@@ -160,5 +160,5 @@ A `REQUEST CHANGES` verdict always has at least one Critical or Important gap, a
 ## Composition
 
 - **Invoke directly when:** the user asks how risky a change is to merge, or whether a PR is safe to ship.
-- **Invoke via:** `/verify` (parallel fan-out alongside `code-reviewer`, `test-engineer`, `comment-auditor`, and `edge-case-hunter`).
+- **Invoke via:** `/verify` and `/review` (parallel fan-out alongside `code-reviewer`, `test-engineer`, `comment-auditor`, and `edge-case-hunter`).
 - **Do not invoke from another persona.** If you find yourself wanting to delegate to `code-reviewer`, `test-engineer`, `comment-auditor`, or `edge-case-hunter`, surface that as a recommendation in your report instead. Orchestration belongs to slash commands, not personas.
